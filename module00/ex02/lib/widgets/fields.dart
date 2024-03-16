@@ -13,23 +13,22 @@ class Fields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (ctx, constraints) {
-        final height = constraints.maxHeight;
-        return Container(
-          margin: const EdgeInsets.all(10),
-          alignment: Alignment.topRight,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(expression, style: fieldStyle),
-              const SizedBox(height: 5),
-              Text(result, style: fieldStyle),
-            ],
-          ),
-        );
-      },
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(expression, style: fieldStyle),
+            const SizedBox(height: 5),
+            Text(result, style: fieldStyle),
+          ],
+        ),
+      ),
     );
   }
 }

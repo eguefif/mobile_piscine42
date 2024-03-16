@@ -8,15 +8,13 @@ class Calculator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 34, 104),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
         title: const Center(
           child: Text("Calculator"),
         ),
       ),
-      body: const Center(
-        child: CalculatorScreen(),
-      ),
+      body: const CalculatorScreen(),
     );
   }
 }
