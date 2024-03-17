@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ex02/widgets/buttons/pad_button.dart';
 
 class Pad extends StatelessWidget {
-  Pad({super.key, required this.updateExpression});
+  const Pad({super.key});
 
-  function(String value) updateExpression;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class FirstRow extends StatelessWidget {
           BuildButton(label: "7", color: Color.fromARGB(255, 0, 0, 0)),
           BuildButton(label: "8", color: Color.fromARGB(255, 0, 0, 0)),
           BuildButton(label: "9", color: Color.fromARGB(255, 0, 0, 0)),
-          BuildButton(label: "C", color: Color.fromARGB(255, 0, 0, 0)),
+          BuildButton(label: "C", color: Color.fromARGB(255, 255, 0, 0)),
           BuildButton(label: "AC", color: Color.fromARGB(255, 255, 0, 0)),
         ],
       ),

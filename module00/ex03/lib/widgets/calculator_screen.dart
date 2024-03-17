@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ex02/widgets/fields.dart';
-import 'package:ex02/widgets/pad.dart';
+import 'package:ex03/widgets/fields.dart';
+import 'package:ex03/widgets/pad.dart';
+import 'package:ex03/models/expression.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
@@ -12,8 +13,13 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreen extends State<CalculatorScreen> {
-  String expression = "0";
-  String result = "0";
+  Expression expression = Expression();
+
+  void updateExpression(String value) {
+    setState(() {
+      expression.update(value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +27,10 @@ class _CalculatorScreen extends State<CalculatorScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Fields(expression: expression, result: result),
-        const Pad(),
+        Fields(
+            expression: expression.expression,
+            result: expression.result),
+        Pad(updateExpression: updateExpression),
       ],
     );
   }
