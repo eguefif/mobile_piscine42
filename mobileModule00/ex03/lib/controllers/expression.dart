@@ -61,6 +61,7 @@ class Expression {
   void removeLastChar() {
     String removed = "";
 
+    print(removed);
     if (_expression.isNotEmpty) {
       removed = _expression[_expression.length - 1];
       if (_expression.length == 1) {
@@ -71,19 +72,24 @@ class Expression {
       }
     }
     if (digits.contains(removed)) {
-      if (tmpNumber.isNotEmpty) {
-        tmpNumber = tmpNumber.substring(0, tmpNumber.length - 1);
+      if (tmpNumber.isEmpty) {
+        tmpNumber = numbers.last.toString();
       }
-    } else {
+      tmpNumber = tmpNumber.substring(0, tmpNumber.length - 1);
+    } else if (!(removed == "-" &&
+        _expression.length > 2 &&
+        possibleOperations.contains(_expression[_expression.length - 2]))) {
       operations.removeLast();
       tmpNumber = numbers.last.toString();
       numbers.removeLast();
     }
+    print(operations);
+    print(numbers);
   }
 
   void computeResult() {
     _isResult = true;
-    if (tmpNumber == ""){
+    if (tmpNumber == "") {
       _result = "Invalid input";
       return;
     }
@@ -91,6 +97,8 @@ class Expression {
     if (negative) {
       tmp *= -1;
     }
+    print(numbers);
+    print(operations);
     numbers.add(tmp);
     CalculatorController calc = CalculatorController(
         expression: _expression, numbers: numbers, operations: operations);
@@ -98,8 +106,8 @@ class Expression {
   }
 
   void addValue(String value) {
-    if (_expression[_expression.length - 1] == "." && value == "."){
-      return ;
+    if (_expression[_expression.length - 1] == "." && value == ".") {
+      return;
     }
     addValueToExpression(value);
     saveValue(value);
@@ -130,12 +138,7 @@ class Expression {
         value == "-" &&
         possibleOperations.contains(_expression[_expression.length - 2])) {
       negative = true;
-    } else if (_expression.length == 1 && _expression[0] == "+") {
-      return;
-    } else if (_expression.length > 2 && _expression [_expression.length - 1]== "+" && possibleOperations.contains(_expression[_expression.length - 2])){
-      return;
-  }
-    else if (_expression.length == 1 && value == "-") {
+    } else if (_expression.length == 1 && value == "-") {
       negative = true;
     } else {
       if (tmpNumber != "") {
@@ -157,6 +160,5 @@ class Expression {
     } else {
       tmpNumber = value;
     }
-
   }
 }

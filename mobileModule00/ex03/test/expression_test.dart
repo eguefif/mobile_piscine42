@@ -25,6 +25,44 @@ void main() {
       expect(exp.expression, "5+");
     });
 
+    test("Multiple C with multiple operations", () {
+      Expression exp = Expression();
+
+      exp.update("5");
+      exp.update("+");
+      exp.update("-");
+      exp.update("c");
+      exp.update("c");
+      expect(exp.expression, "5");
+    });
+
+    test("Multiple C with multiple operations until last number", () {
+      Expression exp = Expression();
+
+      exp.update("4");
+      exp.update("5");
+      exp.update("+");
+      exp.update("-");
+      exp.update("c");
+      exp.update("c");
+      exp.update("c");
+      expect(exp.expression, "4");
+    });
+
+    test("Multiple C with multiple operations until last number", () {
+      Expression exp = Expression();
+
+      exp.update("4");
+      exp.update("5");
+      exp.update("+");
+      exp.update("-");
+      exp.update("8");
+      exp.update("c");
+      exp.update("c");
+      exp.update("c");
+      expect(exp.expression, "45");
+    });
+
     test("update with fll possible values", () {
       Expression exp = Expression();
 
