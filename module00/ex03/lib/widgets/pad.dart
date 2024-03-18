@@ -82,7 +82,7 @@ class ThirdRow extends StatelessWidget {
           BuildButton(label: "1", color: const Color.fromARGB(255, 0, 0, 0), action: updateExpression),
           BuildButton(label: "2", color: const Color.fromARGB(255, 0, 0, 0), action: updateExpression),
           BuildButton(label: "3", color: const Color.fromARGB(255, 0, 0, 0), action: updateExpression),
-          BuildButton(label: "x", color: const Color.fromARGB(255, 255, 255, 255), action: updateExpression),
+          BuildButton(label: "*", color: const Color.fromARGB(255, 255, 255, 255), action: updateExpression),
           BuildButton(label: "/", color: const Color.fromARGB(255, 255, 255, 255), action: updateExpression),
         ],
       ),

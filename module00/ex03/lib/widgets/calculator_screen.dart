@@ -17,6 +17,9 @@ class _CalculatorScreen extends State<CalculatorScreen> {
 
   void updateExpression(String value) {
     setState(() {
+      if (expression.result != "0"){
+        expression.reset();
+      }
       expression.update(value);
     });
   }
