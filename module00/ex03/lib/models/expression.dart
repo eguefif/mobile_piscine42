@@ -128,56 +128,41 @@ class Expression {
     return true;
   }
 
-  bool addTmpNumbersToNumbers() {
-    if (tmpNumber.isEmpty) {
-      _result = "Invalid input";
-      return false;
-    }
-    double tmp = double.parse(tmpNumber);
-    if (negative == true) {
-      tmp *= -1;
-    }
-    numbers.add(tmp);
-    return true;
-  }
-
   double calculateDivMul() {
-    List<double> newNumbersList = [];
+    int nbrIndex = 0;
+    int opIndex = 0;
 
-    for (int i = 0; i < operations.length; i++) {
-      if ("*/".contains(operations[i])) {
-        if (operations[i] == "*") {
-          newNumbersList.add(numbers[i] * numbers[i + 1]);
-        } else if (operations[i] == "/") {
-          if (numbers[i + 1] == 0) {
+    while (opIndex < operations.length){
+      if ("*/".contains(operations[opIndex])) {
+        if (operations[opIndex] == "*") {
+          numbers[nbrIndex] *= numbers[nbrIndex + 1];
+        } else if (operations[opIndex] == "/") {
+          if (numbers[nbrIndex + 1] == 0) {
             divByZero = true;
             return 0;
           }
-          newNumbersList.add(numbers[i] / numbers[i + 1]);
+          numbers[nbrIndex] /= numbers[nbrIndex + 1];
         }
-        i++;
+        numbers.removeAt(nbrIndex + 1);
+        operations.removeAt(opIndex);
       } else {
-        newNumbersList.add(numbers[i]);
+        opIndex++;
+        nbrIndex++;
       }
     }
-    if (!("*/").contains(operations[operations.length - 1])) {
-      newNumbersList.add(numbers[numbers.length - 1]);
-    }
-    operations.remove("*");
-    operations.remove("/");
-    return calculateAddSub(newNumbersList);
+    return calculateAddSub();
   }
 
-  double calculateAddSub(List<double> newNumbersList) {
-    double retval = newNumbersList[0];
+  double calculateAddSub() {
+    double retval = numbers[0];
 
     for (int i = 0; i < operations.length; i++) {
       if ("+-".contains(operations[i])) {
         if (operations[i] == "+") {
-          retval += newNumbersList[i + 1];
+          retval += numbers[i + 1];
         }
         if (operations[i] == "-") {
-          retval -= newNumbersList[i + 1];
+          retval -= numbers[i + 1];
         }
       }
     }

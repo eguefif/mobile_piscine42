@@ -132,6 +132,36 @@ void main() {
       exp.update("=");
       expect(exp.result, (5 * 100).toString());
     });
+    
+    test("5*3/4", () {
+      Expression exp = Expression();
+
+      exp.update("5");
+      exp.update("*");
+      exp.update("3");
+      exp.update("/");
+      exp.update("4");
+      exp.update("=");
+      expect(exp.result, (5*3/4).toString());;
+    });
+
+    test("5*3/4*2*3/5", () {
+      Expression exp = Expression();
+
+      exp.update("5");
+      exp.update("*");
+      exp.update("3");
+      exp.update("/");
+      exp.update("4");
+      exp.update("*");
+      exp.update("2");
+      exp.update("*");
+      exp.update("3");
+      exp.update("/");
+      exp.update("5");
+      exp.update("=");
+      expect(exp.result, (5*3/4*2*3/5).toString());;
+    });
     test("5+99-33.2*100", () {
       Expression exp = Expression();
 
@@ -153,7 +183,7 @@ void main() {
       exp.update("=");
       expect(exp.result, (5+95-99-33.2*100).toString());
     });
-    test("starting with a +", () {
+    test("+5+3", () {
       Expression exp = Expression();
 
       exp.update("+");
@@ -163,7 +193,7 @@ void main() {
       exp.update("=");
       expect(exp.result, "8");
     });
-    test("one number", () {
+    test("3", () {
       Expression exp = Expression();
 
       exp.update("3");
@@ -171,7 +201,7 @@ void main() {
       expect(exp.result, "3");
     });
 
-    test("one number starting with +", () {
+    test("+3", () {
       Expression exp = Expression();
 
       exp.update("+");
@@ -180,7 +210,7 @@ void main() {
       expect(exp.result, "3");
     });
 
-    test("one number starting with -", () {
+    test("-123", () {
       Expression exp = Expression();
 
       exp.update("-");
@@ -191,7 +221,7 @@ void main() {
       expect(exp.result, "-123");
     });
 
-    test("Two single digit members single digit result operation +", () {
+    test("5+3", () {
       Expression exp = Expression();
 
       exp.update("5");
@@ -201,7 +231,7 @@ void main() {
       expect(exp.result, "8");
     });
 
-    test("Two single digit members two digits result operation +", () {
+    test("5+8", () {
       Expression exp = Expression();
 
       exp.update("5");
@@ -211,7 +241,7 @@ void main() {
       expect(exp.result, "13");
     });
 
-    test("Two single digit members single digit result operation -", () {
+    test("5-3", () {
       Expression exp = Expression();
 
       exp.update("5");
@@ -221,7 +251,7 @@ void main() {
       expect(exp.result, "2");
     });
 
-    test("two digit and one digit members two digits result operation -", () {
+    test("18-3", () {
       Expression exp = Expression();
 
       exp.update("1");
@@ -232,7 +262,7 @@ void main() {
       expect(exp.result, "15");
     });
 
-    test("one digit and two digit members negative result operation -", () {
+    test("1-13", () {
       Expression exp = Expression();
 
       exp.update("1");
@@ -243,7 +273,7 @@ void main() {
       expect(exp.result, "-12");
     });
 
-    test("Two single digit members result operation *", () {
+    test("5*3", () {
       Expression exp = Expression();
 
       exp.update("5");
@@ -253,7 +283,7 @@ void main() {
       expect(exp.result, "15");
     });
 
-    test("single digit and two digits members result operation *", () {
+    test("5*39", () {
       Expression exp = Expression();
 
       exp.update("5");
@@ -264,7 +294,7 @@ void main() {
       expect(exp.result, (5 * 39).toString());
     });
 
-    test("single digit and two digits members negative result operation *", () {
+    test("5*-9", () {
       Expression exp = Expression();
 
       exp.update("5");
@@ -275,7 +305,7 @@ void main() {
       expect(exp.result, (5 * -9).toString());
     });
 
-    test("single digit and two digits negative members result operation *", () {
+    test("-5*-98", () {
       Expression exp = Expression();
 
       exp.update("-");
@@ -288,7 +318,7 @@ void main() {
       expect(exp.result, (-5 * -98).toString());
     });
 
-    test("multiple operations with + and -", () {
+    test("-5+-98-18-1+219", () {
       Expression exp = Expression();
 
       exp.update("-");
@@ -310,7 +340,59 @@ void main() {
       expect(exp.result, (-5 + -98 - 18 - 1 + 219).toString());
     });
 
-    test("multiple operations", () {
+    test("5+2*3/2-4", () {
+      Expression exp = Expression();
+
+      exp.update("5");
+      exp.update("+");
+      exp.update("2");
+      exp.update("*");
+      exp.update("3");
+      exp.update("/");
+      exp.update("2");
+      exp.update("-");
+      exp.update("4");
+      exp.update("=");
+      expect(exp.result, "4");
+    });
+
+    test("5+12.3/2/2/2*4*4*4+2*3/2.51-4", () {
+      Expression exp = Expression();
+
+      exp.update("5");
+      exp.update("+");
+      exp.update("1");
+      exp.update("2");
+      exp.update(".");
+      exp.update("3");
+      exp.update("/");
+      exp.update("2");
+      exp.update("/");
+      exp.update("2");
+      exp.update("/");
+      exp.update("2");
+      exp.update("*");
+      exp.update("4");
+      exp.update("*");
+      exp.update("4");
+      exp.update("*");
+      exp.update("4");
+      exp.update("+");
+      exp.update("2");
+      exp.update("*");
+      exp.update("3");
+      exp.update("/");
+      exp.update("2");
+      exp.update(".");
+      exp.update("5");
+      exp.update("1");
+      exp.update("-");
+      exp.update("4");
+      exp.update("=");
+      expect(exp.result, (5+12.3/2/2/2*4*4*4+2*3/2.51-4).toString());
+    });
+
+    test("-5*-98-18/15+219", () {
       Expression exp = Expression();
 
       exp.update("-");
@@ -333,7 +415,7 @@ void main() {
       expect(exp.result, (-5 * -98 - 18 / 15 + 219).toString());
     });
 
-    test("multiple operations with decimal", () {
+    test("-51.82*-98-1.8/15+219", () {
       Expression exp = Expression();
 
       exp.update("-");
@@ -361,7 +443,7 @@ void main() {
       expect(exp.result, (-51.82 * -98 - 1.8 / 15 + 219).toString());
     });
 
-    test("multiple operations with decimal and use of C thre times", () {
+    test("-51.82*-98-1.8/15+219 with 3 uses of C", () {
       Expression exp = Expression();
 
       exp.update("-");
