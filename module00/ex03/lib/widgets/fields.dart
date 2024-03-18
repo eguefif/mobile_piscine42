@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ex03/models/expression.dart';
+import 'package:ex03/controllers/expression.dart';
 
 class Fields extends StatelessWidget {
   const Fields({super.key, required this.expressions});

@@ -1,3 +1,5 @@
+import 'package:ex03/controllers/calculator_controller.dart';
+
 const possibleValues = "00123456789+-*/.";
 const possibleOperations = "+-*/";
 const digits = "0123456789.";
@@ -9,8 +11,7 @@ class Expression {
   List<String> operations = [];
   String tmpNumber = "0";
   bool negative = false;
-  bool divByZero = false;
-  bool isResult = false;
+  bool _isResult = false;
 
   String get expression {
     return _expression;
@@ -20,15 +21,17 @@ class Expression {
     return _result;
   }
 
-  void reset(){
+  bool get isResult {
+    return _isResult;
+  }
+
+  void reset() {
     _expression = "0";
     _result = "0";
     numbers = [];
     operations = [];
     tmpNumber = "0";
     negative = false;
-    divByZero = false;
-    isResult = false;
   }
 
   void update(String value) {
@@ -78,10 +81,8 @@ class Expression {
   }
 
   void computeResult() {
-    if (isResult == true){
-      return;
-    }
-    if (!checkExpression()) {
+    _isResult = true;
+    if (tmpNumber == ""){
       _result = "Invalid input";
       return;
     }
@@ -89,98 +90,10 @@ class Expression {
     if (negative) {
       tmp *= -1;
     }
-    double resultTmp = 0;
-    if (operations.isEmpty){
-      resultTmp = tmp;
-    }
-    else {
-      numbers.add(tmp);
-      resultTmp = calculateDivMul();
-    }
-    processResult(resultTmp);
-  }
-
-  bool checkExpression() {
-    if (tmpNumber == "") {
-      return false;
-    }
-    if (_expression.isEmpty) {
-      return false;
-    }
-
-    if (("*/".contains(_expression[0]) || _expression[0] == ".")) {
-      return false;
-    }
-    for (int i = 1; i < _expression.length; i++) {
-      if ("*/".contains(_expression[i]) &&
-          possibleOperations.contains(_expression[i - 1])) {
-        return false;
-      }
-    }
-
-    for (int i = 2; i < _expression.length; i++) {
-      if (possibleOperations.contains(_expression[i]) &&
-          possibleOperations.contains(_expression[i - 1]) &&
-          possibleOperations.contains(_expression[i - 2])) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  double calculateDivMul() {
-    int nbrIndex = 0;
-    int opIndex = 0;
-
-    while (opIndex < operations.length){
-      if ("*/".contains(operations[opIndex])) {
-        if (operations[opIndex] == "*") {
-          numbers[nbrIndex] *= numbers[nbrIndex + 1];
-        } else if (operations[opIndex] == "/") {
-          if (numbers[nbrIndex + 1] == 0) {
-            divByZero = true;
-            return 0;
-          }
-          numbers[nbrIndex] /= numbers[nbrIndex + 1];
-        }
-        numbers.removeAt(nbrIndex + 1);
-        operations.removeAt(opIndex);
-      } else {
-        opIndex++;
-        nbrIndex++;
-      }
-    }
-    return calculateAddSub();
-  }
-
-  double calculateAddSub() {
-    double retval = numbers[0];
-
-    for (int i = 0; i < operations.length; i++) {
-      if ("+-".contains(operations[i])) {
-        if (operations[i] == "+") {
-          retval += numbers[i + 1];
-        }
-        if (operations[i] == "-") {
-          retval -= numbers[i + 1];
-        }
-      }
-    }
-    return retval;
-  }
-
-  void processResult(double resultTmp) {
-    if (divByZero) {
-      _result = "Error div by zero";
-    } else {
-      _result = resultTmp.toString();
-    }
-    if (_result.length > 2 &&
-        _result[_result.length - 1] == "0" &&
-        _result[_result.length - 2] == ".") {
-      _result = _result.substring(0, _result.length - 2);
-    }
-    isResult = true;
+    numbers.add(tmp);
+    CalculatorController calc = CalculatorController(
+        expression: _expression, numbers: numbers, operations: operations);
+    _result = calc.result;
   }
 
   void addValue(String value) {
