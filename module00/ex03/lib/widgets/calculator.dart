@@ -14,7 +14,7 @@ class Calculator extends StatelessWidget {
           child: Text("Calculator"),
         ),
       ),
-      body: const CalculatorScreen(),
+      body: CalculatorScreen(),
     );
   }
 }

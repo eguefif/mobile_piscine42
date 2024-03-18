@@ -122,6 +122,37 @@ void main() {
   });
   group("Valid calculation test", () {
 
+    test("5*100", () {
+      Expression exp = Expression();
+
+      exp.update("5");
+      exp.update("*");
+      exp.update("1");
+      exp.update("00");
+      exp.update("=");
+      expect(exp.result, (5 * 100).toString());
+    });
+    test("5+99-33.2*100", () {
+      Expression exp = Expression();
+
+      exp.update("5");
+      exp.update("+");
+      exp.update("9");
+      exp.update("5");
+      exp.update("-");
+      exp.update("9");
+      exp.update("9");
+      exp.update("-");
+      exp.update("3");
+      exp.update("3");
+      exp.update(".");
+      exp.update("2");
+      exp.update("*");
+      exp.update("1");
+      exp.update("00");
+      exp.update("=");
+      expect(exp.result, (5+95-99-33.2*100).toString());
+    });
     test("starting with a +", () {
       Expression exp = Expression();
 

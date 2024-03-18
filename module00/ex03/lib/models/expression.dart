@@ -7,9 +7,10 @@ class Expression {
   String _result = "0";
   List<double> numbers = [];
   List<String> operations = [];
-  String tmpNumber = "";
+  String tmpNumber = "0";
   bool negative = false;
   bool divByZero = false;
+  bool isResult = false;
 
   String get expression {
     return _expression;
@@ -24,10 +25,10 @@ class Expression {
     _result = "0";
     numbers = [];
     operations = [];
-    tmpNumber = "";
+    tmpNumber = "0";
     negative = false;
     divByZero = false;
-    numbers = [];
+    isResult = false;
   }
 
   void update(String value) {
@@ -77,6 +78,9 @@ class Expression {
   }
 
   void computeResult() {
+    if (isResult == true){
+      return;
+    }
     if (!checkExpression()) {
       _result = "Invalid input";
       return;
@@ -191,6 +195,7 @@ class Expression {
         _result[_result.length - 2] == ".") {
       _result = _result.substring(0, _result.length - 2);
     }
+    isResult = true;
   }
 
   void addValue(String value) {
@@ -211,7 +216,7 @@ class Expression {
   void saveValue(String value) {
     if (possibleOperations.contains(value)) {
       saveOperations(value);
-    } else if (digits.contains(value)) {
+    } else if (digits.contains(value) || value == "00") {
       saveNumbers(value);
     }
   }

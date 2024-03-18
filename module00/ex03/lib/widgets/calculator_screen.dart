@@ -4,7 +4,8 @@ import 'package:ex03/widgets/pad.dart';
 import 'package:ex03/models/expression.dart';
 
 class CalculatorScreen extends StatefulWidget {
-  const CalculatorScreen({super.key});
+  CalculatorScreen({super.key});
+
 
   @override
   State<CalculatorScreen> createState() {
@@ -13,14 +14,15 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreen extends State<CalculatorScreen> {
-  Expression expression = Expression();
+  final List<Expression> expressions = [Expression()];
+  final restartValues = "123456789+-";
 
   void updateExpression(String value) {
     setState(() {
-      if (expression.result != "0"){
-        expression.reset();
+      if (expressions.first.isResult && restartValues.contains(value)){
+        expressions.insert(0, Expression());
       }
-      expression.update(value);
+      expressions.first.update(value);
     });
   }
 
@@ -30,9 +32,7 @@ class _CalculatorScreen extends State<CalculatorScreen> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Fields(
-            expression: expression.expression,
-            result: expression.result),
+        Fields(expressions: expressions),
         Pad(updateExpression: updateExpression),
       ],
     );
