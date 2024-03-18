@@ -24,10 +24,6 @@ class CalculatorController {
     if (isResult == true) {
       return;
     }
-    if (!checkExpression()) {
-      _result = "Invalid input";
-      return;
-    }
     double resultTmp = 0;
     if (operations.isEmpty) {
       resultTmp = numbers[0];
@@ -35,41 +31,6 @@ class CalculatorController {
       resultTmp = calculateDivMul();
     }
     processResult(resultTmp);
-  }
-
-  bool checkExpression() {
-    if (expression.isEmpty) {
-      return false;
-    }
-
-    if ("*/".contains(expression[0])) {
-      return false;
-    }
-    if (expression.length > 2 &&
-        possibleOperations.contains(expression[0]) &&
-        possibleOperations.contains(expression[1])) {
-      return false;
-    }
-
-    for (int i = 1; i < expression.length; i++) {
-      if ("*/".contains(expression[i]) && "+-*/".contains(expression[i - 1])) {
-        return false;
-      }
-    }
-    for (int i = 1; i < expression.length; i++) {
-      if ("*/".contains(expression[i]) && "*/".contains(expression[i - 1])) {
-        return false;
-      }
-    }
-
-    for (int i = 2; i < expression.length; i++) {
-      if (possibleOperations.contains(expression[i]) &&
-          possibleOperations.contains(expression[i - 1]) &&
-          possibleOperations.contains(expression[i - 2])) {
-        return false;
-      }
-    }
-    return true;
   }
 
   double calculateDivMul() {

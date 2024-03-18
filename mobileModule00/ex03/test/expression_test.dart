@@ -25,27 +25,27 @@ void main() {
       expect(exp.expression, "5+");
     });
 
-    test("Multiple C with multiple operations", () {
+    test("5+-CC", () {
       Expression exp = Expression();
 
       exp.update("5");
       exp.update("+");
       exp.update("-");
-      exp.update("c");
-      exp.update("c");
+      exp.update("C");
+      exp.update("C");
       expect(exp.expression, "5");
     });
 
-    test("Multiple C with multiple operations until last number", () {
+    test("45+-ccc", () {
       Expression exp = Expression();
 
       exp.update("4");
       exp.update("5");
       exp.update("+");
       exp.update("-");
-      exp.update("c");
-      exp.update("c");
-      exp.update("c");
+      exp.update("C");
+      exp.update("C");
+      exp.update("C");
       expect(exp.expression, "4");
     });
 
@@ -57,9 +57,9 @@ void main() {
       exp.update("+");
       exp.update("-");
       exp.update("8");
-      exp.update("c");
-      exp.update("c");
-      exp.update("c");
+      exp.update("C");
+      exp.update("C");
+      exp.update("C");
       expect(exp.expression, "45");
     });
 
@@ -169,7 +169,7 @@ void main() {
       exp.update("+");
       exp.update("3");
       exp.update("=");
-      expect(exp.result, (6.2+3).toString());
+      expect(exp.result, "Invalid input");
     });
 
     test("0.23*100", () {
