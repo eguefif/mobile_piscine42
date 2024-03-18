@@ -1,6 +1,6 @@
 import 'package:ex03/controllers/calculator_controller.dart';
 
-const possibleValues = "00123456789+-*/.";
+const possibleValues = "0123456789+-*/.";
 const possibleOperations = "+-*/";
 const digits = "0123456789.";
 
@@ -12,6 +12,7 @@ class Expression {
   String tmpNumber = "0";
   bool negative = false;
   bool _isResult = false;
+  bool firstUpdate = true;
 
   String get expression {
     return _expression;
@@ -42,7 +43,7 @@ class Expression {
       removeLastChar();
     } else if (value == "=") {
       computeResult();
-    } else if (possibleValues.contains(value)) {
+    } else if (possibleValues.contains(value) || value == "00") {
       addValue(value);
     } else {
       _expression = "Invalid input";
@@ -97,15 +98,20 @@ class Expression {
   }
 
   void addValue(String value) {
+    if (_expression[_expression.length - 1] == "." && value == "."){
+      return ;
+    }
     addValueToExpression(value);
     saveValue(value);
   }
 
   void addValueToExpression(String value) {
-    if (_expression == "0") {
-      if (value != "0" && value != "00") {
-        _expression = value;
+    if (firstUpdate) {
+      if (value == "00") {
+        value = "0";
       }
+      firstUpdate = false;
+      _expression = value;
     } else {
       _expression += value;
     }
@@ -126,7 +132,10 @@ class Expression {
       negative = true;
     } else if (_expression.length == 1 && _expression[0] == "+") {
       return;
-    } else if (_expression.length == 1 && value == "-") {
+    } else if (_expression.length > 2 && _expression [_expression.length - 1]== "+" && possibleOperations.contains(_expression[_expression.length - 2])){
+      return;
+  }
+    else if (_expression.length == 1 && value == "-") {
       negative = true;
     } else {
       if (tmpNumber != "") {
@@ -146,9 +155,8 @@ class Expression {
     if (tmpNumber != "") {
       tmpNumber += value;
     } else {
-      if (!"00.".contains(value)) {
-        tmpNumber = value;
-      }
+      tmpNumber = value;
     }
+
   }
 }

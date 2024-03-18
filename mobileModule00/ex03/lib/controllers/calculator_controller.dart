@@ -3,7 +3,10 @@ const possibleOperations = "+-*/";
 const digits = "0123456789.";
 
 class CalculatorController {
-  CalculatorController({required this.expression, required this.numbers, required this.operations});
+  CalculatorController(
+      {required this.expression,
+      required this.numbers,
+      required this.operations});
 
   String _result = "";
   bool isResult = false;
@@ -12,14 +15,13 @@ class CalculatorController {
   final List<double> numbers;
   final List<String> operations;
 
-
   String get result {
     computeResult();
     return _result;
   }
 
   void computeResult() {
-    if (isResult == true){
+    if (isResult == true) {
       return;
     }
     if (!checkExpression()) {
@@ -27,10 +29,9 @@ class CalculatorController {
       return;
     }
     double resultTmp = 0;
-    if (operations.isEmpty){
+    if (operations.isEmpty) {
       resultTmp = numbers[0];
-    }
-    else {
+    } else {
       resultTmp = calculateDivMul();
     }
     processResult(resultTmp);
@@ -41,12 +42,22 @@ class CalculatorController {
       return false;
     }
 
-    if (("*/".contains(expression[0]) || expression[0] == ".")) {
+    if ("*/".contains(expression[0])) {
       return false;
     }
+    if (expression.length > 2 &&
+        possibleOperations.contains(expression[0]) &&
+        possibleOperations.contains(expression[1])) {
+      return false;
+    }
+
     for (int i = 1; i < expression.length; i++) {
-      if ("*/".contains(expression[i]) &&
-          possibleOperations.contains(expression[i - 1])) {
+      if ("*/".contains(expression[i]) && "+-*/".contains(expression[i - 1])) {
+        return false;
+      }
+    }
+    for (int i = 1; i < expression.length; i++) {
+      if ("*/".contains(expression[i]) && "*/".contains(expression[i - 1])) {
         return false;
       }
     }
@@ -65,7 +76,7 @@ class CalculatorController {
     int nbrIndex = 0;
     int opIndex = 0;
 
-    while (opIndex < operations.length){
+    while (opIndex < operations.length) {
       if ("*/".contains(operations[opIndex])) {
         if (operations[opIndex] == "*") {
           numbers[nbrIndex] *= numbers[nbrIndex + 1];
@@ -107,14 +118,12 @@ class CalculatorController {
       _result = "Error div by zero";
     } else {
       _result = resultTmp.toString();
-    }
-    if (_result.length > 2 &&
-        _result[_result.length - 1] == "0" &&
-        _result[_result.length - 2] == ".") {
-      _result = _result.substring(0, _result.length - 2);
+      if (_result.length > 2 &&
+          _result[_result.length - 1] == "0" &&
+          _result[_result.length - 2] == ".") {
+        _result = _result.substring(0, _result.length - 2);
+      }
     }
     isResult = true;
   }
-
-
 }

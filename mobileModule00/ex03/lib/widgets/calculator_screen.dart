@@ -15,11 +15,10 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreen extends State<CalculatorScreen> {
   final List<Expression> expressions = [Expression()];
-  final restartValues = "123456789+-";
 
   void updateExpression(String value) {
     setState(() {
-      if (expressions.first.isResult && restartValues.contains(value)){
+      if (expressions.first.isResult && value != "="){
         expressions.insert(0, Expression());
       }
       expressions.first.update(value);

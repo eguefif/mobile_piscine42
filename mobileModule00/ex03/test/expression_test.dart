@@ -121,7 +121,45 @@ void main() {
     });
   });
   group("Valid calculation test", () {
+    test("6..2+3", () {
+      Expression exp = Expression();
 
+      exp.update("6");
+      exp.update(".");
+      exp.update(".");
+      exp.update("2");
+      exp.update("+");
+      exp.update("3");
+      exp.update("=");
+      expect(exp.result, (6.2+3).toString());
+    });
+
+    test("0.23*100", () {
+      Expression exp = Expression();
+
+      exp.update("00");
+      exp.update(".");
+      exp.update("2");
+      exp.update("3");
+      exp.update("*");
+      exp.update("1");
+      exp.update("00");
+      exp.update("=");
+      expect(exp.result, "23");
+    });
+    test("0.23*100", () {
+      Expression exp = Expression();
+
+      exp.update("0");
+      exp.update(".");
+      exp.update("2");
+      exp.update("3");
+      exp.update("*");
+      exp.update("1");
+      exp.update("00");
+      exp.update("=");
+      expect(exp.result, "23");
+    });
     test("5*100", () {
       Expression exp = Expression();
 
@@ -132,7 +170,7 @@ void main() {
       exp.update("=");
       expect(exp.result, (5 * 100).toString());
     });
-    
+
     test("5*3/4", () {
       Expression exp = Expression();
 
@@ -142,7 +180,8 @@ void main() {
       exp.update("/");
       exp.update("4");
       exp.update("=");
-      expect(exp.result, (5*3/4).toString());;
+      expect(exp.result, (5 * 3 / 4).toString());
+      ;
     });
 
     test("5*3/4*2*3/5", () {
@@ -160,7 +199,8 @@ void main() {
       exp.update("/");
       exp.update("5");
       exp.update("=");
-      expect(exp.result, (5*3/4*2*3/5).toString());;
+      expect(exp.result, (5 * 3 / 4 * 2 * 3 / 5).toString());
+      ;
     });
     test("5+99-33.2*100", () {
       Expression exp = Expression();
@@ -181,7 +221,7 @@ void main() {
       exp.update("1");
       exp.update("00");
       exp.update("=");
-      expect(exp.result, (5+95-99-33.2*100).toString());
+      expect(exp.result, (5 + 95 - 99 - 33.2 * 100).toString());
     });
     test("+5+3", () {
       Expression exp = Expression();
@@ -389,7 +429,8 @@ void main() {
       exp.update("-");
       exp.update("4");
       exp.update("=");
-      expect(exp.result, (5+12.3/2/2/2*4*4*4+2*3/2.51-4).toString());
+      expect(exp.result,
+          (5 + 12.3 / 2 / 2 / 2 * 4 * 4 * 4 + 2 * 3 / 2.51 - 4).toString());
     });
 
     test("-5*-98-18/15+219", () {
@@ -480,17 +521,131 @@ void main() {
       exp.update("=");
       expect(exp.result, (-51.82 * -98 - 1.8 / 15 + 219).toString());
     });
+    test("7-+9", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("-");
+      exp.update("+");
+      exp.update("9");
+      exp.update('=');
+      expect(exp.result, (7 - 9).toString());
+    });
+
+    test("7++8", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("+");
+      exp.update("+");
+      exp.update("8");
+      exp.update('=');
+      expect(exp.result, (7 + 8).toString());
+    });
+
+    test("7--8", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("-");
+      exp.update("-");
+      exp.update("8");
+      exp.update('=');
+      expect(exp.result, (7 + 8).toString());
+    });
+
+    test("7/+8", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("/");
+      exp.update("+");
+      exp.update("8");
+      exp.update('=');
+      expect(exp.result, (7 / 8).toString());
+    });
+    test("7*+8", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("*");
+      exp.update("+");
+      exp.update("8");
+      exp.update('=');
+      expect(exp.result, (7 * 8).toString());
+    });
+
+    test("7*-8", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("*");
+      exp.update("-");
+      exp.update("8");
+      exp.update('=');
+      expect(exp.result, (7 * (-8)).toString());
+    });
+
+    test("7/-8", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("/");
+      exp.update("-");
+      exp.update("8");
+      exp.update('=');
+      expect(exp.result, (7 / -8).toString());
+    });
+    test("7-+8", () {
+      Expression exp = Expression();
+
+      exp.update("7");
+      exp.update("-");
+      exp.update("+");
+      exp.update("8");
+      exp.update('=');
+      expect(exp.result, (7 - 8).toString());
+    });
   });
 
   group("Invalid calculation", () {
-    test("missing the last number", (){
+    test("missing the last number", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("+");
       exp.update("=");
       expect(exp.result, "Invalid input");
     });
-    test("two operations in a row +*", (){
+
+    test("7//7=", () {
+      Expression exp = Expression();
+      exp.update("7");
+      exp.update("*");
+      exp.update("*");
+      exp.update("7");
+      exp.update("=");
+      expect(exp.result, "Invalid input");
+    });
+    test("7**7=", () {
+      Expression exp = Expression();
+      exp.update("7");
+      exp.update("*");
+      exp.update("*");
+      exp.update("7");
+      exp.update("=");
+      expect(exp.result, "Invalid input");
+    });
+
+    test("two operations in a row -*", () {
+      Expression exp = Expression();
+      exp.update("7");
+      exp.update("-");
+      exp.update("*");
+      exp.update("7");
+      exp.update("=");
+      expect(exp.result, "Invalid input");
+    });
+    test("two operations in a row +*", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("+");
@@ -500,7 +655,7 @@ void main() {
       expect(exp.result, "Invalid input");
     });
 
-    test("two operations in a row -*", (){
+    test("two operations in a row -*", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("-");
@@ -509,7 +664,7 @@ void main() {
       exp.update("=");
       expect(exp.result, "Invalid input");
     });
-    test("two operations in a row -*", (){
+    test("two operations in a row -*", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("-");
@@ -519,7 +674,7 @@ void main() {
       expect(exp.result, "Invalid input");
     });
 
-    test("two operations in a row /*", (){
+    test("two operations in a row /*", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("/");
@@ -529,7 +684,7 @@ void main() {
       expect(exp.result, "Invalid input");
     });
 
-    test("Three operations in a row /+*", (){
+    test("Three operations in a row /+*", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("/");
@@ -540,7 +695,7 @@ void main() {
       expect(exp.result, "Invalid input");
     });
 
-    test("Three operations in a row -+*", (){
+    test("Three operations in a row -+*", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("-");
@@ -551,13 +706,62 @@ void main() {
       expect(exp.result, "Invalid input");
     });
 
-    test("Three operations in a row -+-", (){
+    test("Three operations in a row -+-", () {
       Expression exp = Expression();
       exp.update("7");
       exp.update("-");
       exp.update("+");
       exp.update("*");
       exp.update("7");
+      exp.update("=");
+      expect(exp.result, "Invalid input");
+    });
+  });
+  group("Division by 0", () {
+    test("Simple division by 0", (){
+      Expression exp = Expression();
+
+      exp.update("1");
+      exp.update("2");
+      exp.update("3");
+      exp.update("/");
+      exp.update("0");
+      exp.update("=");
+      expect(exp.result, "Error div by zero");
+    });
+
+    test("Complex division by 0", (){
+      Expression exp = Expression();
+
+      exp.update("1");
+      exp.update("2");
+      exp.update("3");
+      exp.update("/");
+      exp.update("4");
+      exp.update("5");
+      exp.update("*");
+      exp.update("5");
+      exp.update("/");
+      exp.update("0");
+      exp.update("=");
+      expect(exp.result, "Error div by zero");
+    });
+
+    test("+-6", () {
+      Expression exp = Expression();
+
+      exp.update("-");
+      exp.update("+");
+      exp.update("6");
+      exp.update("=");
+      expect(exp.result, "Invalid input");
+    });
+    test("-+6", () {
+      Expression exp = Expression();
+
+      exp.update("-");
+      exp.update("+");
+      exp.update("6");
       exp.update("=");
       expect(exp.result, "Invalid input");
     });
