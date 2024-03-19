@@ -14,7 +14,7 @@ class BodyContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(title, style: Theme.of(context).textTheme.titleLarge),
-          Text(location, style: Theme.of(context).textTheme.titleLarge),
+          Text(location),
         ],
       ),
     );

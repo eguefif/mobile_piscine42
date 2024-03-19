@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_proj/widget/body_content.dart';
-import 'package:weather_proj/widget/top_bar.dart';
-import 'package:weather_proj/widget/gps_button.dart';
+import 'package:weatherappv2proj/widget/body_content.dart';
+import 'package:weatherappv2proj/widget/top_bar.dart';
+import 'package:weatherappv2proj/widget/gps_button.dart';
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
