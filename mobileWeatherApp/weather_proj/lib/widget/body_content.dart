@@ -12,7 +12,10 @@ class BodyContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [Text(location), Text(title)],
+        children: [
+          Text(location, style: Theme.of(context).textTheme.titleLarge),
+          Text(title, style: Theme.of(context).textTheme.titleLarge)
+        ],
       ),
     );
   }

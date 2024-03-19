@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_proj/widget/body_content.dart';
+import 'package:weather_proj/widget/top_bar.dart';
+import 'package:weather_proj/widget/gps_button.dart';
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
@@ -12,14 +14,6 @@ class WeatherApp extends StatefulWidget {
 
 class _WeatherApp extends State<WeatherApp> {
   String location = "";
-  final _controllerSearch = TextEditingController();
-
-  @override
-  void dispose() {
-    _controllerSearch.dispose();
-    super.dispose();
-  }
-
   void changeLocation(String newLocation) {
     setState(() {
       location = newLocation;
@@ -33,24 +27,12 @@ class _WeatherApp extends State<WeatherApp> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-            title: Row(
-              children: [
-                const Icon(Icons.search),
-                Expanded(
-                  child: TextField(
-                    controller: _controllerSearch,
-                    onSubmitted: changeLocation,
-                  ),
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.location_pin),
-                tooltip: 'your location',
-                onPressed: () {},
-              ),
-            ]),
+          title: TopBar(changeLocation: changeLocation),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          actions: const <Widget>[
+            GpsButton(),
+          ],
+        ),
         body: TabBarView(
           children: <Widget>[
             BodyContent(location: location, title: "Currently"),
