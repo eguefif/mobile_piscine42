@@ -44,13 +44,6 @@ class _TopBar extends State<TopBar> {
             setState(
               () {
                 entries = fetcherRetval;
-                print("NEW data $entries");
-                print("DId he tapped: $hasTapped");
-                /*
-                if (!hasTapped){
-                  controller.openView();
-                }
-                */
               },
             );
           },
@@ -59,7 +52,6 @@ class _TopBar extends State<TopBar> {
         });
       }
       else {
-        print("DEFAULT");
         entries = defaultValues;
       }
     }
@@ -72,12 +64,17 @@ class _TopBar extends State<TopBar> {
         controller: controller,
         padding: const MaterialStatePropertyAll(EdgeInsets.all(3.0)),
         onTap: () {
-          _controller = controller;
-          //controller.openView();
           controller.addListener(refreshView);
+          _controller = controller;
+          if (!hasTapped){
+            controller.openView();
+          }
         },
         onChanged: (_) {
           controller.openView();
+        },
+        onSubmitted: (_){
+          refreshView();
         },
         leading: const Icon(Icons.search),
       ),
@@ -101,9 +98,9 @@ class _TopBar extends State<TopBar> {
             onTap: () {
               setState(
                 () {
-                  print("test $entry");
                   hasTapped = true;
                   controller.closeView(entry);
+                  controller.removeListener(refreshView);
                   widget.changeLocation([
                     entries[index]["latitude"],
                     entries[index]["longitude"],
