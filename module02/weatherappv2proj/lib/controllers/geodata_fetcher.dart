@@ -9,8 +9,10 @@ Future<List<Map<String, dynamic>>> geoDataFetcher(String entry) async {
   if (response.statusCode == 200) {
     try {
       var body = jsonDecode(response.body) as Map<String, dynamic>;
-      List<dynamic> choices = body["results"]!;
-      return getListFromBody(choices, entry);
+      if (body.containsKey("results")){
+        List<dynamic> choices = body["results"]!;
+        return getListFromBody(choices, entry);
+      }
     } catch (error) {
       print("ERROR in geofetcher: $error");
     }
