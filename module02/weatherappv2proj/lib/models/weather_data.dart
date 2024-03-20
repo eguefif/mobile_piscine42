@@ -1,62 +1,75 @@
-final Map<int, String> code = {
-  0: "Clear sky",
-  1: "Mainly clear",
-  2: "Partly couldy",
-  3: "Overcast",
-  45: "fog",
-  48: "Depositing rime fog",
-  51: "Light drizzle",
-  52: "Moderate drizzle",
-  53: "Dense drizzle",
-  56: "Light freezing drizzle",
-  57: "Dense freezing drizzle",
-  61: "Slight rain",
-  63: "Moderate rain",
-  65: "Heavy rain",
-  66: "Light freezing rain",
-  67: "Heavy freezing rain",
-  71: "Slight snow fall",
-  73: "Moderate snow fall",
-  75: "Heavy snow fall",
-  77: "Snow grains",
-  80: "Slight rain showers",
-  81: "Moderate rain showers",
-  82: "Violent rain showers",
-  85: "Slight snow showers",
-  86: "Heavy snow showers",
-  95: "Thunderstorm",
-  96: "Slight thunderstom with hail",
-  99: "Heavy thunderstom with hail",
-};
+import 'package:weatherappv2proj/models/weather_code.dart';
 
 class WeatherData {
   const WeatherData(
       {required this.location,
       required this.currentConditions,
       required this.today,
-      required this.week});
+      required this.week,
+      required this.error});
 
   final Map<String, String> location;
   final Map<String, dynamic> currentConditions;
   final Map<String, dynamic> today;
   final Map<String, dynamic> week;
+  final Map<String, dynamic> error;
 
   factory WeatherData.fromJson(Map<String, dynamic> geoCoding,
       Map<String, dynamic> todayData, Map<String, dynamic> dailyData) {
-    final location = getLocation(geoCoding);
+    final location = getLocationData(geoCoding);
     final current = getCurrentData(todayData);
     final today = getTodayData(todayData);
     final week = getDailyData(dailyData);
+    final Map<String, dynamic> error = {"error": false, "msg": ""};
     return WeatherData(
         location: location,
         currentConditions: current,
         today: today,
-        week: week);
+        week: week,
+        error: error);
+  }
+
+  factory WeatherData.fromError(String errorMsg) {
+    final location = {"city": "", "state": "", "country": ""};
+    final currentConditions = {"temp": null, "description": "", "speed": null};
+    final today = {
+      "hours": [],
+      "temperature": [],
+      "description": [],
+      "speed": []
+    };
+    final week = {"date": [], "maxs": [], "mins": [], "description": []};
+    final error = {"error": true, "msg": errorMsg};
+    return WeatherData(
+        location: location,
+        currentConditions: currentConditions,
+        today: today,
+        week: week,
+        error: error);
+  }
+
+  factory WeatherData.fromNothing() {
+    final location = {"city": "", "state": "", "country": ""};
+    final currentConditions = {"temp": null, "description": "", "speed": null};
+    final today = {
+      "hours": [],
+      "temperature": [],
+      "description": [],
+      "speed": []
+    };
+    final week = {"date": [], "maxs": [], "mins": [], "description": []};
+    final error = {"error": false, "msg": ""};
+    return WeatherData(
+        location: location,
+        currentConditions: currentConditions,
+        today: today,
+        week: week,
+        error: error);
   }
 }
 
-Map<String, String> getLocation(Map<String, dynamic> geoCoding) {
-  Map<String, String> retval = Map();
+Map<String, String> getLocationData(Map<String, dynamic> geoCoding) {
+  Map<String, String> retval = {};
   retval["city"] = geoCoding["name"];
   retval["state"] = geoCoding["state"];
   retval["country"] = geoCoding["country"];
@@ -64,7 +77,7 @@ Map<String, String> getLocation(Map<String, dynamic> geoCoding) {
 }
 
 Map<String, dynamic> getDailyData(Map<String, dynamic> data) {
-  Map<String, dynamic> retval = Map();
+  Map<String, dynamic> retval = {};
   retval["date"] = [];
   retval["maxs"] = [];
   retval["mins"] = [];
@@ -86,7 +99,7 @@ Map<String, dynamic> getDailyData(Map<String, dynamic> data) {
 }
 
 Map<String, dynamic> getTodayData(Map<String, dynamic> data) {
-  Map<String, dynamic> retval = Map();
+  Map<String, dynamic> retval = {};
   retval["hours"] = [];
   retval["temperature"] = [];
   retval["description"] = [];
@@ -123,11 +136,15 @@ int getStartIdx(List times) {
 }
 
 Map<String, dynamic> getCurrentData(Map<String, dynamic> data) {
-  Map<String, dynamic> retval = Map();
+  Map<String, dynamic> retval = {};
 
   int currentIdx = getStartIdx(data["hourly"]["time"]);
   retval["temp"] = data["hourly"]["temperature_2m"][currentIdx];
   retval["description"] = code[data["hourly"]["weather_code"][currentIdx]];
   retval["speed"] = data["hourly"]["wind_speed_10m"][currentIdx];
   return retval;
+}
+
+bool isNoData(WeatherData data) {
+return !data.error["error"] && (data.location["city"] == null || data.location["city"] == "");
 }

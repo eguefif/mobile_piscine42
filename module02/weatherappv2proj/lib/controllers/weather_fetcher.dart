@@ -34,9 +34,7 @@ class WeatherFetcher {
       var daily = jsonDecode(dailyResponse.body) as Map<String, dynamic>;
       return WeatherData.fromJson(geo[0], today, daily);
     }
-    print(geoResponse.body);
-    print(todayResponse.body);
-    print(dailyResponse.body);
-    return Future.error("Cannot fetch data");
+    return WeatherData.fromError("Cannot fetch data.");
+    //return Future.error("Cannot fetch data");
   }
 }
