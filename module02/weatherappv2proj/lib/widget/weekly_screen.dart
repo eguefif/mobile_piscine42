@@ -22,7 +22,7 @@ class WeeklyScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Today", style: Theme.of(context).textTheme.titleLarge),
+          Text(title, style: Theme.of(context).textTheme.titleLarge),
           Text("${data.location["city"]}"),
           Text("${data.location["state"]}"),
           Text("${data.location["country"]}"),

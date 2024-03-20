@@ -18,7 +18,6 @@ class WeatherApp extends StatefulWidget {
 }
 
 class _WeatherApp extends State<WeatherApp> {
-  String location = "";
   String key = "";
   WeatherData data = WeatherData.fromNothing();
 
@@ -41,10 +40,14 @@ class _WeatherApp extends State<WeatherApp> {
     super.initState();
   }
 
-  void changeLocation(String newLocation) {
-    setState(() {
-      location = newLocation;
-    });
+  void changeLocation(List<double> newLocation) {
+      WeatherFetcher fetcher = WeatherFetcher(
+          latitude: newLocation[0], longitude: newLocation[1]);
+      fetcher.fetchWeather().then((tmpData) {
+        setState(() {
+          data = tmpData;
+        });
+      });
   }
 
   void fetchWeather() async {
@@ -72,6 +75,7 @@ class _WeatherApp extends State<WeatherApp> {
       child: Scaffold(
         appBar: AppBar(
           title: TopBar(changeLocation: changeLocation),
+          toolbarHeight: 85,
           backgroundColor: Theme.of(context).colorScheme.primary,
           actions: <Widget>[
             GpsButton(fetchWeather: fetchWeather),
