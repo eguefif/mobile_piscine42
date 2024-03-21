@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weatherappv2proj/controllers/geodata_fetcher.dart';
-import 'package:weatherappv2proj/models/default_search_values.dart';
+import 'package:module03/controllers/geodata_fetcher.dart';
+import 'package:module03/models/default_search_values.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({super.key, required this.changeLocation});
@@ -27,16 +27,14 @@ class _TopBar extends State<TopBar> {
             setState(
               () {
                 entries = fetcherRetval;
-                print("TEEEEEST");
-                controller.openView();
+                //controller.openView();
               },
             );
           },
         ).catchError((error) {
           entries = defaultValues;
         });
-      }
-      else {
+      } else {
         entries = defaultValues;
       }
     }
@@ -56,18 +54,15 @@ class _TopBar extends State<TopBar> {
         onChanged: (_) {
           controller.openView();
         },
-        onSubmitted: (_){
+        onSubmitted: (_) {
           controller.removeListener(refreshView);
           controller.closeView(controller.text);
         },
         leading: const Icon(Icons.search),
       ),
-      suggestionsBuilder: (context, controller) => List<ListTile>.generate(
-        20,
+      suggestionsBuilder: (context, controller) => List<Column>.generate(
+        5,
         (int index) {
-          if (index >= entries.length){
-            return const ListTile(title: Text(""));
-          }
           final String city = entries[index]["city"];
           final String state = entries[index]["state"];
           final String country = entries[index]["country"];
@@ -77,21 +72,27 @@ class _TopBar extends State<TopBar> {
             entry += " $state";
           }
           entry += " $country";
-          return ListTile(
-            title: Text(entry),
-            onTap: () {
-              setState(
-                () {
-                  hasTapped = true;
-                  controller.closeView(entry);
-                  controller.removeListener(refreshView);
-                  widget.changeLocation([
-                    entries[index]["latitude"],
-                    entries[index]["longitude"],
-                  ]);
+          return Column(
+            children: [
+              ListTile(
+                title: Text(entry),
+                leading: const Icon(Icons.location_city),
+                onTap: () {
+                  setState(
+                    () {
+                      hasTapped = true;
+                      controller.closeView(entry);
+                      controller.removeListener(refreshView);
+                      widget.changeLocation([
+                        entries[index]["latitude"],
+                        entries[index]["longitude"],
+                      ]);
+                    },
+                  );
                 },
-              );
-            },
+              ),
+              if (index < 4) const Divider(),
+            ],
           );
         },
       ),
