@@ -18,23 +18,29 @@ class CurrentScreen extends StatelessWidget {
     if (data.error["error"]) {
       return ErrorBody(data: data, title: title);
     }
-
-    double smallHeight = 25;
-    double bigHeight = 45;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("${data.location["city"]}",
-              style: Theme.of(context).textTheme.titleMedium),
-          Text("${data.location["state"]}, ${data.location["country"]}",
-              style: Theme.of(context).textTheme.bodyMedium),
+          Column(
+            children: [
+              Text("${data.location["city"]}",
+                  style: Theme.of(context).textTheme.titleMedium),
+              Text("${data.location["state"]}, ${data.location["country"]}",
+                  style: Theme.of(context).textTheme.bodyMedium),
+            ],
+          ),
           Text("${data.currentConditions["temp"]} \u2103",
               style: Theme.of(context).textTheme.titleLarge),
-          Text("${data.currentConditions["description"].description}",
-              style: Theme.of(context).textTheme.bodyMedium),
-          data.currentConditions["description"].getIcon(),
+          Column(
+            children: [
+              Text("${data.currentConditions["description"].description}",
+                  style: Theme.of(context).textTheme.bodyMedium),
+              const SizedBox(height: 10),
+              data.currentConditions["description"].getIcon(),
+            ],
+          ),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

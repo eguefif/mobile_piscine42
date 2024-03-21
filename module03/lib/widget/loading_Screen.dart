@@ -17,7 +17,7 @@ class _LoadingScreen extends State<LoadingScreen>
   void initState() {
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 5),
     )..addListener(() {
         setState(() {});
       });
