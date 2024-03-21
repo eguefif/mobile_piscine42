@@ -18,41 +18,79 @@ class CurrentScreen extends StatelessWidget {
     if (data.error["error"]) {
       return ErrorBody(data: data, title: title);
     }
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            children: [
-              Text("${data.location["city"]}",
-                  style: Theme.of(context).textTheme.titleMedium),
-              Text("${data.location["state"]}, ${data.location["country"]}",
-                  style: Theme.of(context).textTheme.bodyMedium),
-            ],
-          ),
-          Text("${data.currentConditions["temp"]} \u2103",
-              style: Theme.of(context).textTheme.titleLarge),
-          Column(
-            children: [
-              Text("${data.currentConditions["description"].description}",
-                  style: Theme.of(context).textTheme.bodyMedium),
-              const SizedBox(height: 10),
-              data.currentConditions["description"].getIcon(),
-            ],
-          ),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+    if (MediaQuery.of(context).size.height > 600) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
               children: [
-                Icon(size: 55, getWindIcon(data.currentConditions["speed"])),
-                const SizedBox(width: 15),
-                Text("${data.currentConditions["speed"]} km/h",
+                Text("${data.location["city"]}",
+                    style: Theme.of(context).textTheme.titleMedium),
+                Text("${data.location["state"]}, ${data.location["country"]}",
                     style: Theme.of(context).textTheme.bodyMedium),
-              ]),
-        ],
-      ),
-    );
+              ],
+            ),
+            Text("${data.currentConditions["temp"]} \u2103",
+                style: Theme.of(context).textTheme.titleLarge),
+            Column(
+              children: [
+                Text("${data.currentConditions["description"].description}",
+                    style: Theme.of(context).textTheme.bodyMedium),
+                const SizedBox(height: 10),
+                data.currentConditions["description"].getIcon(),
+              ],
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(size: 55, getWindIcon(data.currentConditions["speed"])),
+                  const SizedBox(width: 15),
+                  Text("${data.currentConditions["speed"]} km/h",
+                      style: Theme.of(context).textTheme.bodyMedium),
+                ]),
+          ],
+        ),
+      );
+    } else {
+      return Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Text("${data.location["city"]}",
+                    style: Theme.of(context).textTheme.titleMedium),
+                Text("${data.location["state"]}, ${data.location["country"]}",
+                    style: Theme.of(context).textTheme.bodyMedium),
+              ],
+            ),
+            Text("${data.currentConditions["temp"]} \u2103",
+                style: Theme.of(context).textTheme.titleLarge),
+            Column(
+              children: [
+                Text("${data.currentConditions["description"].description}",
+                    style: Theme.of(context).textTheme.bodyMedium),
+                const SizedBox(height: 10),
+                data.currentConditions["description"].getIcon(),
+              ],
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(size: 55, getWindIcon(data.currentConditions["speed"])),
+                  const SizedBox(width: 15),
+                  Text("${data.currentConditions["speed"]} km/h",
+                      style: Theme.of(context).textTheme.bodyMedium),
+                ]),
+          ],
+        ),
+      );
+    }
   }
 }
 
