@@ -51,7 +51,16 @@ class _WeatherApp extends State<WeatherApp> {
     });
   }
 
+  void switchToLoadingScreen(){
+    setState(() {
+      data.error["error"] = false;
+      data.location["city"] = "";
+    });
+
+  }
+
   void fetchWeather() async {
+
     getLocation().then((position) {
       WeatherFetcher fetcher = WeatherFetcher(
           latitude: position.latitude, longitude: position.longitude);
@@ -75,11 +84,11 @@ class _WeatherApp extends State<WeatherApp> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: TopBar(changeLocation: changeLocation),
+          title: TopBar(changeLocation: changeLocation, switchLoading: switchToLoadingScreen),
           toolbarHeight: 85,
           backgroundColor: Theme.of(context).colorScheme.background,
           actions: <Widget>[
-            GpsButton(fetchWeather: fetchWeather),
+            GpsButton(fetchWeather: fetchWeather, switchLoading: switchToLoadingScreen),
           ],
         ),
         body: DecoratedBox(

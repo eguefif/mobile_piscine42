@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class GpsButton extends StatelessWidget {
-  const GpsButton({super.key, required this.fetchWeather});
+  const GpsButton({super.key, required this.fetchWeather, required this.switchLoading});
 
   final void Function() fetchWeather;
+  final void Function() switchLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class GpsButton extends StatelessWidget {
       color: Theme.of(context).colorScheme.onPrimary,
       tooltip: 'your location',
       onPressed: () async {
+        switchLoading();
         fetchWeather();
       },
     );

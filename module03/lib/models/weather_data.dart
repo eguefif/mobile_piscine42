@@ -90,9 +90,9 @@ Map<String, dynamic> getDailyData(Map<String, dynamic> data) {
 
   for (int i = 0; i < 7; i++) {
     retval["date"].add(
-        "${DateTime.parse(times[i]).year}-${DateTime.parse(times[i]).month}-${DateTime.parse(times[i]).day}");
-    retval["maxs"].add(maxs[i]);
-    retval["mins"].add(mins[i]);
+        "${DateTime.parse(times[i]).day}/${DateTime.parse(times[i]).month}");
+    retval["maxs"].add(maxs[i] as double);
+    retval["mins"].add(mins[i] as double);
     retval["description"].add(WeatherCode(code: descriptions[i]));
   }
   return retval;
@@ -109,7 +109,7 @@ Map<String, dynamic> getTodayData(Map<String, dynamic> data) {
   List temp = data["hourly"]["temperature_2m"];
   List speed = data["hourly"]["wind_speed_10m"];
   List descriptions = data["hourly"]["weather_code"];
-  int startIdx = getStartIdx(times);
+  int startIdx = 0;//getStartIdx(times);
 
   for (int i = startIdx; i < startIdx + 24; i++) {
     retval["hours"].add(DateTime.parse(times[i]).hour);

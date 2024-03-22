@@ -41,43 +41,44 @@ class WeatherCode {
     return _description;
   }
 
-  Icon getIcon() {
+  Icon getIcon(double size) {
     switch (code) {
       case 0:
       case 1:
-      case 2:
-      case 3:
-        return const Icon(
-            size: 75,
-            color: Color.fromARGB(255, 155, 155, 155),
+        return  Icon(
+            size: size,
             WeatherIcons.day_sunny);
+      case 2:
+        return  Icon(
+            size: size,
+            WeatherIcons.cloud);
+      case 3:
+        return  Icon(
+            size: size,
+            WeatherIcons.day_sunny_overcast);
       case 45:
       case 48:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.fog);
       case 51:
       case 52:
       case 53:
       case 56:
       case 57:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.sprinkle);
       case 61:
       case 63:
       case 65:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.rain);
       case 66:
       case 67:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.sleet);
       case 71:
       case 73:
@@ -86,34 +87,29 @@ class WeatherCode {
       case 85:
       case 87:
       case 77:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.snow);
       case 80:
       case 81:
       case 82:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.showers);
       case 96:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.thunderstorm);
       case 99:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.thunderstorm);
       case 95:
-        return const Icon(
-            size: 100.0,
-            color: Color.fromARGB(255, 221, 92, 18),
+        return  Icon(
+            size: size,
             WeatherIcons.thunderstorm);
     }
 
-    return const Icon(Icons.sunny);
+    return  Icon(size: size, Icons.sunny);
   }
 }

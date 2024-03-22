@@ -13,6 +13,7 @@ void main() {
         textTheme: TextTheme(
           bodySmall: TextStyle(color: kColorScheme.onBackground, fontSize: 10),
           bodyMedium: TextStyle(color: kColorScheme.tertiary, fontSize: 20),
+          bodyLarge: TextStyle(color: kColorScheme.tertiary, fontSize: 25),
           titleMedium: TextStyle(
             color: kColorScheme.primary,
             fontSize: 25,

@@ -3,9 +3,10 @@ import 'package:module03/controllers/geodata_fetcher.dart';
 import 'package:module03/models/default_search_values.dart';
 
 class TopBar extends StatefulWidget {
-  const TopBar({super.key, required this.changeLocation});
+  const TopBar({super.key, required this.changeLocation, required this.switchLoading});
 
   final void Function(List<double>) changeLocation;
+  final void Function() switchLoading;
 
   @override
   State<TopBar> createState() {
@@ -81,6 +82,7 @@ class _TopBar extends State<TopBar> {
                   setState(
                     () {
                       hasTapped = true;
+                      widget.switchLoading();
                       controller.closeView(entry);
                       controller.removeListener(refreshView);
                       widget.changeLocation([
