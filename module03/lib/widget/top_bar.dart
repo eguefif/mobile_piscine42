@@ -9,7 +9,9 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SearchController searchController = SearchController();
     FocusScope.of(context).unfocus();
+    searchController.clear();
     return SearchBar(
         autoFocus: false,
         onTap: () {
@@ -17,6 +19,8 @@ class TopBar extends StatelessWidget {
               arguments: [changeLocation, switchLoading]);
         },
         onChanged: (String value) {
+          searchController.clear();
+          FocusScope.of(context).unfocus();
           Navigator.of(context).pushNamed('/searchPage',
               arguments: [changeLocation, switchLoading, value]);
         });

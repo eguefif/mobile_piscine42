@@ -68,7 +68,7 @@ class _SearchPage extends State<SearchPage> {
           },
         ),
         title: TextField(
-          //autofocus: true,
+          autofocus: true,
           decoration: InputDecoration(
             filled: true,
             fillColor: Theme.of(context).colorScheme.onPrimary,
