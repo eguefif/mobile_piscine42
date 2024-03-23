@@ -120,14 +120,14 @@ class WeeklyListWeatherTile extends StatelessWidget {
             data.week["description"][index].getIcon(45.0),
             const SizedBox(height: 15),
             Text(
-              "${data.week["maxs"][index]} km/h",
+              "${data.week["maxs"][index]}\u2103",
               style: const TextStyle(
                 color: Colors.red,
                 fontSize: 15,
               ),
             ),
             Text(
-              "${data.week["mins"][index]} km/h",
+              "${data.week["mins"][index]}\u2103",
               style: const TextStyle(
                 color: Colors.blue,
                 fontSize: 15,

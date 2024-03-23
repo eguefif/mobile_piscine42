@@ -83,6 +83,7 @@ class _WeatherApp extends State<WeatherApp> {
       initialIndex: 0,
       length: 3,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: TopBar(changeLocation: changeLocation, switchLoading: switchToLoadingScreen),
           toolbarHeight: 85,
