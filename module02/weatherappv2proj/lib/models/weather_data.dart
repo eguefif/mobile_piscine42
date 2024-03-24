@@ -71,8 +71,8 @@ class WeatherData {
 Map<String, String> getLocationData(Map<String, dynamic> geoCoding) {
   Map<String, String> retval = {};
   retval["city"] = geoCoding["name"];
-  retval["state"] = geoCoding["state"];
-  retval["country"] = geoCoding["country"];
+  retval["state"] = geoCoding.keys.contains("state") ? geoCoding["state"] : "None";
+  retval["country"] = geoCoding.keys.contains("country") ? geoCoding["country"] : "None";
   return retval;
 }
 
@@ -90,10 +90,10 @@ Map<String, dynamic> getDailyData(Map<String, dynamic> data) {
 
   for (int i = 0; i < 7; i++) {
     retval["date"].add(
-        "${DateTime.parse(times[i]).year}-${DateTime.parse(times[i]).month}-${DateTime.parse(times[i]).day}");
-    retval["maxs"].add(maxs[i]);
-    retval["mins"].add(mins[i]);
-    retval["description"].add(code[descriptions[i]]);
+        "${DateTime.parse(times[i]).day}/${DateTime.parse(times[i]).month}");
+    retval["maxs"].add(maxs[i] as double);
+    retval["mins"].add(mins[i] as double);
+    retval["description"].add(WeatherCode(code: descriptions[i]));
   }
   return retval;
 }
@@ -108,13 +108,13 @@ Map<String, dynamic> getTodayData(Map<String, dynamic> data) {
   List times = data["hourly"]["time"];
   List temp = data["hourly"]["temperature_2m"];
   List speed = data["hourly"]["wind_speed_10m"];
-  List description = data["hourly"]["weather_code"];
-  int startIdx = getStartIdx(times);
+  List descriptions = data["hourly"]["weather_code"];
+  int startIdx = 0; //getStartIdx(times);
 
   for (int i = startIdx; i < startIdx + 24; i++) {
     retval["hours"].add(DateTime.parse(times[i]).hour);
     retval["temperature"].add(temp[i]);
-    retval["description"].add(code[description[i]]);
+    retval["description"].add(WeatherCode(code: descriptions[i]));
     retval["speed"].add(speed[i]);
   }
   return retval;
@@ -140,11 +140,13 @@ Map<String, dynamic> getCurrentData(Map<String, dynamic> data) {
 
   int currentIdx = getStartIdx(data["hourly"]["time"]);
   retval["temp"] = data["hourly"]["temperature_2m"][currentIdx];
-  retval["description"] = code[data["hourly"]["weather_code"][currentIdx]];
+  retval["description"] =
+      WeatherCode(code: data["hourly"]["weather_code"][currentIdx]);
   retval["speed"] = data["hourly"]["wind_speed_10m"][currentIdx];
   return retval;
 }
 
 bool isNoData(WeatherData data) {
-return !data.error["error"] && (data.location["city"] == null || data.location["city"] == "");
+  return !data.error["error"] &&
+      (data.location["city"] == null || data.location["city"] == "");
 }

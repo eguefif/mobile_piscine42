@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:module03/controllers/geodata_fetcher.dart';
-import 'package:module03/models/default_values_search.dart';
+import 'package:weatherappv2proj/controllers/geodata_fetcher.dart';
+import 'package:weatherappv2proj/models/default_values_search.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage(
-      {super.key, required this.changeLocation, required this.switchLoading});
+      {super.key, required this.changeLocation});
 
   final void Function(List<double>) changeLocation;
-  final void Function() switchLoading;
 
   @override
   State<SearchPage> createState() {
@@ -48,7 +47,6 @@ class _SearchPage extends State<SearchPage> {
   }
 
   void selectItem(double latitude, double longitude) {
-    widget.switchLoading();
     setState(
       () => widget.changeLocation(
         [latitude, longitude],
@@ -88,32 +86,32 @@ class _SearchPage extends State<SearchPage> {
         ),
       ),
       body: ListView.builder(
-        itemCount: entries.length < 5 ? entries.length : 5,
-        itemBuilder: (context, index) {
-          final String city = entries[index]["city"];
-          final String state = entries[index]["state"];
-          final String country = entries[index]["country"];
+          itemCount: entries.length < 5 ? entries.length : 5,
+          itemBuilder: (context, index) {
+            //getCityItem(entries[index], selectItem, index),),
 
-          String entry = city;
-          if (state != "None") {
-            entry += " $state";
-          }
-          entry += " $country";
-          return Column(
-            children: [
-              const Divider(),
-              ListTile(
-                title: Text(entry),
-                leading: const Icon(Icons.location_city),
-                onTap: () {
-                  selectItem(
-                      entries[index]["latitude"], entries[index]["longitude"]);
-                },
-              ),
-            ],
-          );
-        },
-      ),
+            final String city = entries[index]["city"];
+            final String state = entries[index]["state"];
+            final String country = entries[index]["country"];
+
+            String entry = city;
+            if (state != "None") {
+              entry += " $state";
+            }
+            entry += " $country";
+            return Column(
+              children: [
+                const Divider(),
+                ListTile(
+                    title: Text(entry),
+                    leading: const Icon(Icons.location_city),
+                    onTap: () {
+                      selectItem(entries[index]["latitude"],
+                          entries[index]["longitude"]);
+                    },),
+              ],
+            );
+          },),
     );
   }
 }

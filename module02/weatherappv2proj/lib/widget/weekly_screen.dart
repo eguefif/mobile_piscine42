@@ -35,7 +35,7 @@ class WeeklyScreen extends StatelessWidget {
                           Text("${data.week["date"][index]}"),
                           Text("${data.week["maxs"][index]} C"),
                           Text("${data.week["mins"][index]} C"),
-                          Text("${data.week["description"][index]}"),
+                          Text("${data.week["description"][index].description}"),
                         ])),
           )
         ],

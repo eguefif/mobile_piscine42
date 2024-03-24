@@ -36,7 +36,7 @@ class TodayScreen extends StatelessWidget {
                   Text("${data.today["hours"][index]}:00"),
                   Text("${data.today["temperature"][index]} C"),
                   Text("${data.today["speed"][index]}km/h"),
-                  Text("${data.today["description"][index]}"),
+                  Text("${data.today["description"][index].description}"),
                 ],
               ),
             ),

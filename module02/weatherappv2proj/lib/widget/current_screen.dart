@@ -28,7 +28,7 @@ class CurrentScreen extends StatelessWidget {
           Text("${data.location["state"]}"),
           Text("${data.location["country"]}"),
           Text("${data.currentConditions["temp"]} C"),
-          Text("${data.currentConditions["description"]}"),
+          Text("${data.currentConditions["description"].description}"),
           Text("${data.currentConditions["speed"]} km/h"),
         ],
       ),
