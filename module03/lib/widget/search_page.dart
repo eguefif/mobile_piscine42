@@ -54,6 +54,7 @@ class _SearchPage extends State<SearchPage> {
         [latitude, longitude],
       ),
     );
+    controller.clear();
     Navigator.of(context).pop();
   }
 
@@ -87,7 +88,7 @@ class _SearchPage extends State<SearchPage> {
         ),
       ),
       body: ListView.builder(
-          itemCount: entries.length < 5 ? entries.length : 5,
+          itemCount: entries.length < 5 ? entries.length : 8,
           itemBuilder: (context, index) {
             //getCityItem(entries[index], selectItem, index),),
 

@@ -8,15 +8,17 @@ class TitleBody extends StatelessWidget {
   final WeatherData data;
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    print(data.location["state"]);
     return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("${data.location["city"]}",
-                    style: Theme.of(context).textTheme.titleMedium),
-                Text("${data.location["state"]}, ${data.location["country"]}",
-                    style: Theme.of(context).textTheme.bodyMedium),
-              ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("${data.location["city"]}",
+            style: Theme.of(context).textTheme.titleMedium),
+        Text(
+            "${data.location["state"] != "None" ? "${data.location["state"]}," : ""} ${data.location["country"] != "None" ? data.location["country"] : ""}",
+            style: Theme.of(context).textTheme.bodyMedium),
+      ],
     );
   }
 }
@@ -27,16 +29,18 @@ class TitleBodyRow extends StatelessWidget {
   final WeatherData data;
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    print(data.location["state"]);
     return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("${data.location["city"]}",
-                    style: Theme.of(context).textTheme.titleMedium),
-                    const SizedBox(width: 25),
-                Text("${data.location["state"]}, ${data.location["country"]}",
-                    style: Theme.of(context).textTheme.bodyMedium),
-              ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("${data.location["city"]}",
+            style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(width: 25),
+        Text(
+            "${data.location["state"]}${data.location["state"] != "None" ? "," : ""} ${data.location["country"]}",
+            style: Theme.of(context).textTheme.bodyMedium),
+      ],
     );
   }
 }

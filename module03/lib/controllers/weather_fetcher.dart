@@ -35,6 +35,5 @@ class WeatherFetcher {
       return WeatherData.fromJson(geo[0], today, daily);
     }
     return WeatherData.fromError("Cannot fetch data.");
-    //return Future.error("Cannot fetch data");
   }
 }
