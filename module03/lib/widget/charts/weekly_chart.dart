@@ -25,7 +25,7 @@ class WeeklyChart extends StatelessWidget {
       return retval;
     }
     return AspectRatio(
-      aspectRatio: 1.4,
+      aspectRatio: 1.5,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: LineChart(

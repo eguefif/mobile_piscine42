@@ -13,16 +13,18 @@ class TopBar extends StatelessWidget {
     FocusScope.of(context).unfocus();
     searchController.clear();
     return SearchBar(
-        autoFocus: false,
-        onTap: () {
-          Navigator.of(context).pushNamed('/searchPage',
-              arguments: [changeLocation, switchLoading]);
-        },
-        onChanged: (String value) {
-          searchController.clear();
-          FocusScope.of(context).unfocus();
-          Navigator.of(context).pushNamed('/searchPage',
-              arguments: [changeLocation, switchLoading, value]);
-        });
+      leading: const Icon(Icons.search),
+      autoFocus: false,
+      onTap: () {
+        Navigator.of(context).pushNamed('/searchPage',
+            arguments: [changeLocation, switchLoading]);
+      },
+      onChanged: (String value) {
+        searchController.clear();
+        FocusScope.of(context).unfocus();
+        Navigator.of(context).pushNamed('/searchPage',
+            arguments: [changeLocation, switchLoading, value]);
+      },
+    );
   }
 }

@@ -35,11 +35,11 @@ class WeeklyScreenResponsiveVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TitleBody(data: data),
-          const SizedBox(height: 25),
+          const SizedBox(height: 55),
           Text("Weekly temperatures",
               style: Theme.of(context).textTheme.titleMedium),
           WeeklyChart(
@@ -47,6 +47,7 @@ class WeeklyScreenResponsiveVertical extends StatelessWidget {
             minData: buildSeriesWeek(data.week["mins"]),
             xAxisTitle: data.week["date"],
           ),
+         const SizedBox(height: 38),
           SizedBox(
             height: 150,
             child: ListView.builder(

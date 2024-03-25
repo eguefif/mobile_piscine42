@@ -38,16 +38,15 @@ class TodayScreenResponsiveHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TitleBody(data: data),
-          const SizedBox(height: 20),
+          const SizedBox(height: 55),
           Column(
             children: [
               Text("Today's temperatures",
                   style: Theme.of(context).textTheme.titleMedium),
-              const SizedBox(height: 25),
               TodayChart(
                 data: buildSeries(
                   data.today["hours"],
@@ -56,7 +55,7 @@ class TodayScreenResponsiveHorizontal extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 28),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -119,10 +118,7 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
   final WeatherData data;
   @override
   Widget build(BuildContext context) {
-    ScrollController scrollController = ScrollController(
-      initialScrollOffset: getStartIdx(data.today["hours"]) as double,
-      keepScrollOffset: true,
-    );
+    ScrollController scrollController = ScrollController();
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
