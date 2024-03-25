@@ -9,7 +9,29 @@ var kColorScheme = ColorScheme.fromSeed(
 void main() {
   runApp(
     MaterialApp(
-      theme: ThemeData(
+      theme: getTheme(),
+      onGenerateRoute: (settings) {
+        if (settings.name == '/searchPage') {
+          List arg = settings.arguments as List;
+          final void Function(List<double>) changeLocation = arg[0];
+          final void Function() switchLoading = arg[1];
+
+          return MaterialPageRoute(
+            builder: (context) => SearchPage(
+              changeLocation: changeLocation,
+              switchLoading: switchLoading,
+            ),
+          );
+        }
+        
+        return MaterialPageRoute(builder: (context) => const WeatherApp());
+      },
+    ),
+  );
+}
+
+ThemeData getTheme(){
+  return ThemeData(
         useMaterial3: true,
         colorScheme: kColorScheme,
         textTheme: TextTheme(
@@ -27,22 +49,5 @@ void main() {
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-      onGenerateRoute: (settings) {
-        if (settings.name == '/searchPage') {
-          List arg = settings.arguments as List;
-          final void Function(List<double>) changeLocation = arg[0];
-          final void Function() switchLoading = arg[1];
-
-          return MaterialPageRoute(
-            builder: (context) => SearchPage(
-              changeLocation: changeLocation,
-              switchLoading: switchLoading,
-            ),
-          );
-        }
-        return MaterialPageRoute(builder: (context) => const WeatherApp());
-      },
-    ),
-  );
+      );
 }
