@@ -43,8 +43,10 @@ class _SearchPage extends State<SearchPage> {
         );
       },
     ).catchError((error) {
-      entries = defaultValues;
-    });
+		setState(() {
+			  entries = [{"error": error}];
+		},);
+    },);
   }
 
   void selectItem(double latitude, double longitude) {
@@ -90,6 +92,12 @@ class _SearchPage extends State<SearchPage> {
       body: ListView.builder(
         itemCount: entries.length < 5 ? entries.length : 5,
         itemBuilder: (context, index) {
+          if (entries[0].keys.contains("error")){
+            return ListTile(
+              title: Text(entries[0]["error"],
+              style: const TextStyle(color: Colors.red),)
+            );
+          }
           final String city = entries[index]["city"];
           final String state = entries[index]["state"];
           final String country = entries[index]["country"];

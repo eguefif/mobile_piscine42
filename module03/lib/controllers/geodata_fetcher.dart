@@ -5,6 +5,7 @@ Future<List<Map<String, dynamic>>> geoDataFetcher(String entry) async {
   var search =
       "https://geocoding-api.open-meteo.com/v1/search?name=$entry&count=5&language=en&format=json";
 
+  try{ 
   final response = await http.get(Uri.parse(search));
   if (response.statusCode == 200) {
     try {
@@ -17,7 +18,11 @@ Future<List<Map<String, dynamic>>> geoDataFetcher(String entry) async {
       return Future.error("No data");
     }
   }
-  return Future.error("No data");
+  }
+  catch(error) {
+    return Future.error("The service connection is lost, please check your internet connection or try again later");
+  }
+  return Future.error("Could not find any result for the supplied address or coordinates");
 }
 
 List<Map<String, dynamic>> getListFromBody(

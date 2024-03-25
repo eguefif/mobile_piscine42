@@ -47,7 +47,7 @@ class WeeklyScreenResponsiveVertical extends StatelessWidget {
             minData: buildSeriesWeek(data.week["mins"]),
             xAxisTitle: data.week["date"],
           ),
-         const SizedBox(height: 38),
+         //const SizedBox(height: 38),
           SizedBox(
             height: 150,
             child: ListView.builder(

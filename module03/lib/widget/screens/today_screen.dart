@@ -55,7 +55,7 @@ class TodayScreenResponsiveHorizontal extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 28),
+          //const SizedBox(height: 28),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -130,7 +130,6 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
               data.today["temperature"],
             ),
           ),
-          const SizedBox(width: 20),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

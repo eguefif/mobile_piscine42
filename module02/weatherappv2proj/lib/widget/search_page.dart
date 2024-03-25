@@ -3,8 +3,7 @@ import 'package:weatherappv2proj/controllers/geodata_fetcher.dart';
 import 'package:weatherappv2proj/models/default_values_search.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage(
-      {super.key, required this.changeLocation});
+  const SearchPage({super.key, required this.changeLocation});
 
   final void Function(List<double>) changeLocation;
 
@@ -41,9 +40,17 @@ class _SearchPage extends State<SearchPage> {
           },
         );
       },
-    ).catchError((error) {
-      entries = defaultValues;
-    });
+    ).catchError(
+      (error) {
+        setState(
+          () {
+            entries = [
+              {"error": error}
+            ];
+          },
+        );
+      },
+    );
   }
 
   void selectItem(double latitude, double longitude) {
@@ -86,32 +93,42 @@ class _SearchPage extends State<SearchPage> {
         ),
       ),
       body: ListView.builder(
-          itemCount: entries.length < 5 ? entries.length : 5,
-          itemBuilder: (context, index) {
-            //getCityItem(entries[index], selectItem, index),),
-
-            final String city = entries[index]["city"];
-            final String state = entries[index]["state"];
-            final String country = entries[index]["country"];
-
-            String entry = city;
-            if (state != "None") {
-              entry += " $state";
-            }
-            entry += " $country";
-            return Column(
-              children: [
-                const Divider(),
-                ListTile(
-                    title: Text(entry),
-                    leading: const Icon(Icons.location_city),
-                    onTap: () {
-                      selectItem(entries[index]["latitude"],
-                          entries[index]["longitude"]);
-                    },),
-              ],
+        itemCount: entries.length < 5 ? entries.length : 5,
+        itemBuilder: (context, index) {
+          //getCityItem(entries[index], selectItem, index),),
+          if (entries[0].keys.contains("error")) {
+            return ListTile(
+                title: Text(
+                  entries[0]["error"],
+                  style: const TextStyle(color: Colors.red),
+                ),
             );
-          },),
+          }
+
+          final String city = entries[index]["city"];
+          final String state = entries[index]["state"];
+          final String country = entries[index]["country"];
+
+          String entry = city;
+          if (state != "None") {
+            entry += " $state";
+          }
+          entry += " $country";
+          return Column(
+            children: [
+              const Divider(),
+              ListTile(
+                title: Text(entry),
+                leading: const Icon(Icons.location_city),
+                onTap: () {
+                  selectItem(
+                      entries[index]["latitude"], entries[index]["longitude"]);
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

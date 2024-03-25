@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:module03/models/weather_data.dart';
 import 'package:module03/controllers/key.dart';
 
-
 class WeatherFetcher {
   WeatherFetcher({required this.latitude, required this.longitude})
       : geoCoding =
@@ -22,18 +21,24 @@ class WeatherFetcher {
   final String dailyApi;
 
   Future<WeatherData> fetchWeather() async {
-    final geoResponse = await http.get(Uri.parse(geoCoding));
-    final todayResponse = await http.get(Uri.parse(todayApi));
-    final dailyResponse = await http.get(Uri.parse(dailyApi));
+    try {
+      final geoResponse = await http.get(Uri.parse(geoCoding));
+      final todayResponse = await http.get(Uri.parse(todayApi));
+      final dailyResponse = await http.get(Uri.parse(dailyApi));
 
-    if (geoResponse.statusCode == 200 &&
-        todayResponse.statusCode == 200 &&
-        dailyResponse.statusCode == 200) {
-      var geo = jsonDecode(geoResponse.body) as List<dynamic>;
-      var today = jsonDecode(todayResponse.body) as Map<String, dynamic>;
-      var daily = jsonDecode(dailyResponse.body) as Map<String, dynamic>;
-      return WeatherData.fromJson(geo[0], today, daily);
+      if (geoResponse.statusCode == 200 &&
+          todayResponse.statusCode == 200 &&
+          dailyResponse.statusCode == 200) {
+        var geo = jsonDecode(geoResponse.body) as List<dynamic>;
+        var today = jsonDecode(todayResponse.body) as Map<String, dynamic>;
+        var daily = jsonDecode(dailyResponse.body) as Map<String, dynamic>;
+        return WeatherData.fromJson(geo[0], today, daily);
+      }
+      return WeatherData.fromError(
+          "The service connection is lost, please check your internet connection or try again later");
+    } catch (error) {
+      return WeatherData.fromError(
+          "The service connection is lost, please check your internet connection or try again later");
     }
-    return WeatherData.fromError("Cannot fetch data.");
   }
 }
