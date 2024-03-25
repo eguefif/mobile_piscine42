@@ -35,11 +35,10 @@ class WeeklyScreenResponsiveVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TitleBody(data: data),
-          const SizedBox(height: 55),
           Text("Weekly temperatures",
               style: Theme.of(context).textTheme.titleMedium),
           WeeklyChart(
@@ -47,7 +46,6 @@ class WeeklyScreenResponsiveVertical extends StatelessWidget {
             minData: buildSeriesWeek(data.week["mins"]),
             xAxisTitle: data.week["date"],
           ),
-         //const SizedBox(height: 38),
           SizedBox(
             height: 150,
             child: ListView.builder(
@@ -72,7 +70,7 @@ class WeeklyScreenResponsiveHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           WeeklyChart(
@@ -80,12 +78,11 @@ class WeeklyScreenResponsiveHorizontal extends StatelessWidget {
             minData: buildSeriesWeek(data.week["mins"]),
             xAxisTitle: data.week["date"],
           ),
-          const SizedBox(width: 20),
           Column(
             children: [
               TitleBodyRow(data: data),
               SizedBox(
-                height: 150,
+               height: 130,
                 width: 450,
                 child: ListView.builder(
                   itemCount: data.week["date"].length,
@@ -116,10 +113,10 @@ class WeeklyListWeatherTile extends StatelessWidget {
         Column(
           children: [
             Text("${data.week["date"][index]}",
-                style: Theme.of(context).textTheme.bodyLarge),
-            const SizedBox(height: 10),
-            data.week["description"][index].getIcon(45.0),
-            const SizedBox(height: 15),
+                style: Theme.of(context).textTheme.bodyMedium),
+            const SizedBox(height: 5),
+            data.week["description"][index].getIcon(35.0),
+            const SizedBox(height: 5),
             Text(
               "${data.week["maxs"][index]}\u2103",
               style: const TextStyle(

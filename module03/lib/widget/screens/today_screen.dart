@@ -38,11 +38,10 @@ class TodayScreenResponsiveHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TitleBody(data: data),
-          const SizedBox(height: 55),
           Column(
             children: [
               Text("Today's temperatures",
@@ -55,7 +54,6 @@ class TodayScreenResponsiveHorizontal extends StatelessWidget {
               ),
             ],
           ),
-          //const SizedBox(height: 28),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -90,10 +88,10 @@ class TodayListWeatherTile extends StatelessWidget {
         Column(
           children: [
             Text("${data.today["hours"][index]}:00",
-                style: Theme.of(context).textTheme.bodyLarge),
+                style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 10),
-            data.today["description"][index].getIcon(45.0),
-            const SizedBox(height: 15),
+            data.today["description"][index].getIcon(35.0),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,7 +119,7 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
     ScrollController scrollController = ScrollController();
     return Center(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TodayChart(
@@ -137,7 +135,7 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
                 TitleBodyRow(data: data),
                 SizedBox(
                   width: 450,
-                  height: 150,
+                  height: 130,
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: data.today["hours"].length,
