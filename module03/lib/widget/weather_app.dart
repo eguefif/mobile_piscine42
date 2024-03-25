@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:module03/widget/top_bar.dart';
-import 'package:module03/widget/gps_button.dart';
-import 'package:module03/widget/current_screen.dart';
-import 'package:module03/widget/today_screen.dart';
-import 'package:module03/widget/weekly_screen.dart';
+import 'package:module03/widget/helpers/gps_button.dart';
+import 'package:module03/widget/screens/current_screen.dart';
+import 'package:module03/widget/screens/today_screen.dart';
+import 'package:module03/widget/screens/weekly_screen.dart';
 import 'package:module03/models/weather_data.dart';
 import 'package:module03/controllers/weather_fetcher.dart';
 import 'package:module03/controllers/locator_controller.dart';

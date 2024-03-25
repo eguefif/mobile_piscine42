@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:module03/widget/weather_app.dart';
-import 'package:module03/widget/search_page.dart';
+import 'package:module03/widget/screens/search_page.dart';
 
 var kColorScheme = ColorScheme.fromSeed(
     seedColor: const Color.fromARGB(255, 221, 92, 18),

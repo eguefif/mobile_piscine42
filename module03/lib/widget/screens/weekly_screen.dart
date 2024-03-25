@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:module03/models/weather_data.dart';
-import 'package:module03/widget/loading_screen.dart';
-import 'package:module03/widget/error_body.dart';
-import 'package:module03/widget/title.dart';
+import 'package:module03/widget/screens/loading_screen.dart';
+import 'package:module03/widget/screens/error_screen.dart';
+import 'package:module03/widget/helpers/title.dart';
 import 'package:module03/widget/charts/weekly_chart.dart';
 
 class WeeklyScreen extends StatelessWidget {
