@@ -128,8 +128,11 @@ class _SearchPage extends State<SearchPage> {
           String entry = "";
           if (state != "None") {
             entry = ", $state, ";
+            entry += country;
           }
-          entry += country;
+          else {
+            entry = ", $country";
+          }
 
           return Column(
             children: [

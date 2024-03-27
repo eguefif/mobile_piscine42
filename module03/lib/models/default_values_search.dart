@@ -1,43 +1,43 @@
 List<Map<String, dynamic>> defaultValues = [
   {
     "city": "Paris",
-    "state": "None",
+    "state": "Ile de france",
     "country": "fr",
     "latitude": 48.8566,
     "longitude": 2.3522
   },
   {
-    "city": "Tokyo",
-    "state": "None",
+    "city": "Shinjuku",
+    "state": "Tokyo",
     "country": "jp",
     "latitude": 35.6764,
     "longitude": 139.65
   },
   {
     "city": "Berlin",
-    "state": "None",
+    "state": "Land Berlin",
     "country": "Germany",
     "latitude": 52.52,
     "longitude": 13.4050
   },
   {
     "city": "London",
-    "state": "None",
+    "state": "England",
     "country": "UK",
     "latitude": 51.5072,
     "longitude": 0.1276
   },
   {
     "city": "Madrid",
-    "state": "None",
-    "country": "UK",
+    "state": "Madrid",
+    "country": "Spain",
     "latitude": 40.4168,
     "longitude": 3.7038
   },
   {
     "city": "Roma",
-    "state": "None",
-    "country": "UK",
+    "state": "Lazio",
+    "country": "Italie",
     "latitude": 41.9028,
     "longitude": 12.4964
   },
