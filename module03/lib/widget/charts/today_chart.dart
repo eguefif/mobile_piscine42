@@ -84,7 +84,7 @@ List<Point> buildSeries(List<dynamic> data1, List<dynamic> data2) {
 }
 
 double getMinPointY(List<Point> data) {
-  double min = 30;
+  double min = 90;
 
   for (Point datum in data) {
     if (datum.y < min)  min = datum.y;
@@ -93,7 +93,7 @@ double getMinPointY(List<Point> data) {
 }
 
 double getMaxPointY(List<Point> data) {
-  double max = -50;
+  double max = -100;
 
   for (Point datum in data) {
     if (datum.y > max)  max = datum.y;
