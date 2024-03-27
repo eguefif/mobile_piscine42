@@ -125,16 +125,23 @@ class _SearchPage extends State<SearchPage> {
           final String state = entries[index]["state"];
           final String country = entries[index]["country"];
 
-          String entry = city;
+          String entry = "";
           if (state != "None") {
-            entry += " $state";
+            entry = ", $state, ";
           }
-          entry += " $country";
+          entry += country;
+
           return Column(
             children: [
               const Divider(),
               ListTile(
-                title: Text(entry),
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(city, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(entry, style: const TextStyle(fontSize: 15)),
+                  ],
+                ),
                 leading: const Icon(Icons.location_city),
                 onTap: () {
                   selectItem(
