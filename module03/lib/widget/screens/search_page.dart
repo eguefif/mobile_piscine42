@@ -86,6 +86,12 @@ class _SearchPage extends State<SearchPage> {
           onChanged: (_) {
             refreshView();
           },
+          onSubmitted: (_){
+            refreshView();
+            if (!entries[0].keys.contains("Error")){
+              selectItem(entries[0]["latitude"], entries[0]["longitude"]);
+            }
+          },
           onTap: () {},
         ),
       ),
