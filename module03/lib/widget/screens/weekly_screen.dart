@@ -33,9 +33,11 @@ class WeeklyScreenResponsiveVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width; 
+    double height = MediaQuery.of(context).size.height; 
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TitleBody(data: data),
@@ -47,7 +49,8 @@ class WeeklyScreenResponsiveVertical extends StatelessWidget {
             xAxisTitle: data.week["date"],
           ),
           SizedBox(
-            height: 150,
+            height: height > 150 ? 150 : height,
+            width: width > 450? 450 : width,
             child: ListView.builder(
               itemCount: data.week["date"].length,
               scrollDirection: Axis.horizontal,
@@ -79,10 +82,12 @@ class WeeklyScreenResponsiveHorizontal extends StatelessWidget {
             xAxisTitle: data.week["date"],
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TitleBodyRow(data: data),
               SizedBox(
-               height: 130,
+                height: 130,
                 width: 450,
                 child: ListView.builder(
                   itemCount: data.week["date"].length,

@@ -22,42 +22,44 @@ class TodayChart extends StatelessWidget {
       return retval;
     }
 
-    return AspectRatio(
-      aspectRatio: 1.5,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: LineChart(
-          LineChartData(
-            minY: getMinPointY(data) - 1,
-            maxY: getMaxPointY(data),
-            titlesData: FlTitlesData(
-              leftTitles: AxisTitles(
-                sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: leftChartTitle,
-                    reservedSize: 42,
-                    interval: 2),
+    return Expanded(
+      child: AspectRatio(
+        aspectRatio: 1.5,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: LineChart(
+            LineChartData(
+              minY: getMinPointY(data) - 1,
+              maxY: getMaxPointY(data),
+              titlesData: FlTitlesData(
+                leftTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: leftChartTitle,
+                      reservedSize: 42,
+                      interval: 1),
+                ),
+                rightTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: botChartTitle,
+                      reservedSize: 42,
+                      interval: 5),
+                ),
               ),
-              rightTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
-              ),
-              topTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
-              ),
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: botChartTitle,
-                    reservedSize: 42,
-                    interval: 5),
-              ),
+              lineBarsData: [
+                LineChartBarData(
+                  spots: data.map((point) => FlSpot(point.x, point.y)).toList(),
+                  isCurved: false,
+                ),
+              ],
             ),
-            lineBarsData: [
-              LineChartBarData(
-                spots: data.map((point) => FlSpot(point.x, point.y)).toList(),
-                isCurved: false,
-              ),
-            ],
           ),
         ),
       ),

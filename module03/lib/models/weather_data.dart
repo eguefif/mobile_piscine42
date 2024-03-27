@@ -88,7 +88,7 @@ Map<String, dynamic> getDailyData(Map<String, dynamic> data) {
   List mins = data["daily"]["temperature_2m_min"];
   List descriptions = data["daily"]["weather_code"];
 
-  for (int i = 0; i < 7; i++) {
+  for (int i = 1; i < 8; i++) {
     retval["date"].add(
         "${DateTime.parse(times[i]).day}/${DateTime.parse(times[i]).month}");
     retval["maxs"].add(maxs[i] as double);

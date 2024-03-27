@@ -24,48 +24,50 @@ class WeeklyChart extends StatelessWidget {
           Text(xAxisTitle[value.toInt()], style: Theme.of(context).textTheme.bodySmall);
       return retval;
     }
-    return AspectRatio(
-      aspectRatio: 1.5,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: LineChart(
-          LineChartData(
-            minY: getMinPointYWeek(maxData, minData) - 1,
-            maxY: getMaxPointYWeek(maxData, minData) + 2,
-            titlesData: FlTitlesData(
-              leftTitles: AxisTitles(
-                sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: leftChartTitle,
-                    reservedSize: 42,
-                    interval: 3),
+    return Expanded(
+      child: AspectRatio(
+        aspectRatio: 1.5,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: LineChart(
+            LineChartData(
+              minY: getMinPointYWeek(maxData, minData) - 1,
+              maxY: getMaxPointYWeek(maxData, minData) + 2,
+              titlesData: FlTitlesData(
+                leftTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: leftChartTitle,
+                      reservedSize: 42,
+                      interval: 3),
+                ),
+                rightTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: botChartTitle,
+                      reservedSize: 42,
+                      interval: 1),
+                ),
               ),
-              rightTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
-              ),
-              topTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
-              ),
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: botChartTitle,
-                    reservedSize: 42,
-                    interval: 1),
-              ),
+              lineBarsData: [
+                LineChartBarData(
+                  color: Colors.red,
+                  spots: maxData.map((point) => FlSpot(point.x, point.y)).toList(),
+                  isCurved: false,
+                ),
+                LineChartBarData(
+                  color: Colors.blue,
+                  spots: minData.map((point) => FlSpot(point.x, point.y)).toList(),
+                  isCurved: false,
+                ),
+              ],
             ),
-            lineBarsData: [
-              LineChartBarData(
-                color: Colors.red,
-                spots: maxData.map((point) => FlSpot(point.x, point.y)).toList(),
-                isCurved: false,
-              ),
-              LineChartBarData(
-                color: Colors.blue,
-                spots: minData.map((point) => FlSpot(point.x, point.y)).toList(),
-                isCurved: false,
-              ),
-            ],
           ),
         ),
       ),

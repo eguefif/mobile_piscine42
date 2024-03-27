@@ -9,7 +9,6 @@ class TitleBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data.location["state"]);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -30,7 +29,6 @@ class TitleBodyRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data.location["state"]);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

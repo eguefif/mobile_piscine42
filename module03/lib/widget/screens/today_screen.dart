@@ -23,15 +23,15 @@ class TodayScreen extends StatelessWidget {
       );
     }
     if (MediaQuery.of(context).size.height > 600) {
-      return TodayScreenResponsiveHorizontal(data: data);
-    } else {
       return TodayScreenResponsiveVertical(data: data);
+    } else {
+      return TodayScreenResponsiveHorizontal(data: data);
     }
   }
 }
 
-class TodayScreenResponsiveHorizontal extends StatelessWidget {
-  const TodayScreenResponsiveHorizontal({super.key, required this.data});
+class TodayScreenResponsiveVertical extends StatelessWidget {
+  const TodayScreenResponsiveVertical({super.key, required this.data});
 
   final WeatherData data;
   @override
@@ -42,17 +42,19 @@ class TodayScreenResponsiveHorizontal extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TitleBody(data: data),
-          Column(
-            children: [
-              Text("Today's temperatures",
-                  style: Theme.of(context).textTheme.titleMedium),
-              TodayChart(
-                data: buildSeries(
-                  data.today["hours"],
-                  data.today["temperature"],
+          Expanded(
+            child: Column(
+              children: [
+                Text("Today's temperatures",
+                    style: Theme.of(context).textTheme.titleMedium),
+                TodayChart(
+                  data: buildSeries(
+                    data.today["hours"],
+                    data.today["temperature"],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -115,8 +117,8 @@ class TodayListWeatherTile extends StatelessWidget {
   }
 }
 
-class TodayScreenResponsiveVertical extends StatelessWidget {
-  const TodayScreenResponsiveVertical({super.key, required this.data});
+class TodayScreenResponsiveHorizontal extends StatelessWidget {
+  const TodayScreenResponsiveHorizontal({super.key, required this.data});
 
   final WeatherData data;
   @override
@@ -136,6 +138,7 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TitleBodyRow(data: data),
                 SizedBox(
