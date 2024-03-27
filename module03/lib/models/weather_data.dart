@@ -113,7 +113,7 @@ Map<String, dynamic> getTodayData(Map<String, dynamic> data) {
 
   for (int i = startIdx; i < startIdx + 24; i++) {
     retval["hours"].add(DateTime.parse(times[i]).hour);
-    retval["temperature"].add(temp[i]);
+    retval["temperature"].add(temp[i].toInt());
     retval["description"].add(WeatherCode(code: descriptions[i]));
     retval["speed"].add(speed[i]);
   }
