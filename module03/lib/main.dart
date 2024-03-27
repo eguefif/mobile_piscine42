@@ -15,11 +15,13 @@ void main() {
           List arg = settings.arguments as List;
           final void Function(List<double>) changeLocation = arg[0];
           final void Function() switchLoading = arg[1];
+          final void Function() fetchWeather = arg[2];
 
           return MaterialPageRoute(
             builder: (context) => SearchPage(
               changeLocation: changeLocation,
               switchLoading: switchLoading,
+              fetchWeather: fetchWeather,
             ),
           );
         }

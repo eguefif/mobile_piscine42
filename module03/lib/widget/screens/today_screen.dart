@@ -89,9 +89,14 @@ class TodayListWeatherTile extends StatelessWidget {
           children: [
             Text("${data.today["hours"][index]}:00",
                 style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             data.today["description"][index].getIcon(35.0),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
+            Text(
+              "${data.today["temperature"][index]} \u2103",
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,7 +140,7 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
                 TitleBodyRow(data: data),
                 SizedBox(
                   width: 450,
-                  height: 130,
+                  height: 140,
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: data.today["hours"].length,

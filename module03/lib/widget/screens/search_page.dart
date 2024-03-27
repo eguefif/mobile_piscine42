@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:module03/controllers/geodata_fetcher.dart';
 import 'package:module03/models/default_values_search.dart';
+import 'package:module03/widget/helpers/gps_button.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage(
-      {super.key, required this.changeLocation, required this.switchLoading});
+      {super.key,
+      required this.changeLocation,
+      required this.switchLoading,
+      required this.fetchWeather});
 
   final void Function(List<double>) changeLocation;
   final void Function() switchLoading;
+  final void Function() fetchWeather;
 
   @override
   State<SearchPage> createState() {
@@ -42,11 +47,17 @@ class _SearchPage extends State<SearchPage> {
           },
         );
       },
-    ).catchError((error) {
-		setState(() {
-			  entries = [{"error": error}];
-		},);
-    },);
+    ).catchError(
+      (error) {
+        setState(
+          () {
+            entries = [
+              {"error": error}
+            ];
+          },
+        );
+      },
+    );
   }
 
   void selectItem(double latitude, double longitude) {
@@ -86,23 +97,29 @@ class _SearchPage extends State<SearchPage> {
           onChanged: (_) {
             refreshView();
           },
-          onSubmitted: (_){
+          onSubmitted: (_) {
             refreshView();
-            if (!entries[0].keys.contains("Error")){
+            if (!entries[0].keys.contains("Error")) {
               selectItem(entries[0]["latitude"], entries[0]["longitude"]);
             }
           },
           onTap: () {},
         ),
+        actions: [
+          GpsButtonSearchBar(
+              fetchWeather: widget.fetchWeather,
+              switchLoading: widget.switchLoading),
+        ],
       ),
       body: ListView.builder(
         itemCount: entries.length < 5 ? entries.length : 5,
         itemBuilder: (context, index) {
-          if (entries[0].keys.contains("error")){
+          if (entries[0].keys.contains("error")) {
             return ListTile(
-              title: Text(entries[0]["error"],
-              style: const TextStyle(color: Colors.red),)
-            );
+                title: Text(
+              entries[0]["error"],
+              style: const TextStyle(color: Colors.red),
+            ));
           }
           final String city = entries[index]["city"];
           final String state = entries[index]["state"];

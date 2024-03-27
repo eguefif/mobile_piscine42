@@ -51,7 +51,7 @@ class WeeklyChart extends StatelessWidget {
                     showTitles: true,
                     getTitlesWidget: botChartTitle,
                     reservedSize: 42,
-                    interval: 5),
+                    interval: 1),
               ),
             ),
             lineBarsData: [

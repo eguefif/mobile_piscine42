@@ -85,7 +85,7 @@ class _WeatherApp extends State<WeatherApp> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: TopBar(changeLocation: changeLocation, switchLoading: switchToLoadingScreen),
+          title: TopBar(changeLocation: changeLocation, switchLoading: switchToLoadingScreen, fetchWeather: fetchWeather),
           toolbarHeight: 85,
           backgroundColor: Theme.of(context).colorScheme.background,
           actions: <Widget>[
