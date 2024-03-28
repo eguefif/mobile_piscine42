@@ -91,8 +91,8 @@ Map<String, dynamic> getDailyData(Map<String, dynamic> data) {
   for (int i = 1; i < 8; i++) {
     retval["date"].add(
         "${DateTime.parse(times[i]).day}/${DateTime.parse(times[i]).month}");
-    retval["maxs"].add(maxs[i] as double);
-    retval["mins"].add(mins[i] as double);
+    retval["maxs"].add(maxs[i].toInt());
+    retval["mins"].add(mins[i].toInt());
     retval["description"].add(WeatherCode(code: descriptions[i]));
   }
   return retval;

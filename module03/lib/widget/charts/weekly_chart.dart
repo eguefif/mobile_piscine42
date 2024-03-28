@@ -115,7 +115,7 @@ List<PointWeek> buildSeriesWeek(List<dynamic> data) {
   }
 
   for (var pair in zip([x, data])) {
-    retval.add(PointWeek(x: pair[0] as double, y: pair[1] as double));
+    retval.add(PointWeek(x: pair[0].toDouble(), y: pair[1].toDouble()));
   }
   return retval;
 }

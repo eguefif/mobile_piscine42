@@ -36,6 +36,7 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
   final WeatherData data;
   @override
   Widget build(BuildContext context) {
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -57,9 +58,9 @@ class TodayScreenResponsiveVertical extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(5.0),
             child: SizedBox(
-              height: 150,
+              height: 120,
               child: ListView.builder(
                 itemCount: data.today["hours"].length,
                 scrollDirection: Axis.horizontal,
@@ -91,14 +92,14 @@ class TodayListWeatherTile extends StatelessWidget {
           children: [
             Text("${data.today["hours"][index]}:00",
                 style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 5),
-            data.today["description"][index].getIcon(35.0),
-            const SizedBox(height: 5),
+            const SizedBox(height: 2),
+            data.today["description"][index].getIcon(25.0),
+            const SizedBox(height: 2),
             Text(
               "${data.today["temperature"][index]} \u2103",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,7 +144,7 @@ class TodayScreenResponsiveHorizontal extends StatelessWidget {
                 TitleBodyRow(data: data),
                 SizedBox(
                   width: 450,
-                  height: 140,
+                  height: 120,
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: data.today["hours"].length,

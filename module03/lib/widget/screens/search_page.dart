@@ -139,10 +139,10 @@ class _SearchPage extends State<SearchPage> {
               const Divider(),
               ListTile(
                 title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(city, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    Text(entry, style: const TextStyle(fontSize: 15)),
+                    Text(city, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                    Text(entry, style: const TextStyle(fontSize: 10)),
                   ],
                 ),
                 leading: const Icon(Icons.location_city),
