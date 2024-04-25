@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "182458683602",
+    "project_id": "flutter-cookbook-f14d5",
+    "storage_bucket": "flutter-cookbook-f14d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182458683602:android:d64e9ee47c5ddb3ff99d0b",
+        "android_client_info": {
+          "package_name": "com.example.firebase_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcLIOKibLO_a_03t7ceSR2eOaSb0n-K8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
