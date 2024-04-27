@@ -2,8 +2,6 @@ import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:diaryapp/models/diary_model.dart';
 import 'package:diaryapp/views/login_view.dart';
 import 'package:diaryapp/views/profile_view.dart';
-import 'package:diaryapp/views/widget/buttons/login_button.dart';
-import 'package:diaryapp/views/widget/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
