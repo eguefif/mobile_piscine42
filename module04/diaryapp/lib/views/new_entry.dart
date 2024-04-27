@@ -62,6 +62,8 @@ class _NewEntry extends State<NewEntry> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        Entry entry = Entry(title: _titleController.text, content: _contentController.text, date: DateTime.now().millisecondsSinceEpoch ~/ 1000, feeling: 2,);
+
                         controller.addEntry(entry!);
                       },
                       child: const Text("Add entry"),
