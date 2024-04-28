@@ -58,6 +58,7 @@ class DiaryModel extends ChangeNotifier {
             title: entry.get("title"),
             date: entry.get("date"),
             feeling: entry.get("feeling"),
+            id: entry.id,
           ),
         );
       }
@@ -69,11 +70,10 @@ class DiaryModel extends ChangeNotifier {
     }
   }
 
-  void addEntry(Entry entry) {
+  void addEntry(Entry entry) async {
     _entries.add(entry);
-    _entries.sort((a, b) => b.date - a.date);
     try {
-      entriesFirebase!.add(
+      DocumentReference newEntry = await entriesFirebase!.add(
         {
           "title": entry.title,
           "content": entry.content,
@@ -82,14 +82,17 @@ class DiaryModel extends ChangeNotifier {
           "email": email,
         },
       );
+      _entries.last.id = newEntry.id;
     } catch (e) {
       debugPrint("ADD FIREBASE: $e");
     }
+    _entries.sort((a, b) => b.date - a.date);
     notifyListeners();
   }
 
-  void deleteEntry(Entry entry) {
-    _entries.remove(entry);
+  void deleteEntry(int index) async {
+    await entriesFirebase!.doc(_entries[index].id).delete();
+    _entries.removeAt(index);
     notifyListeners();
   }
 
@@ -105,17 +108,20 @@ class Entry {
   final int date;
   final String feeling;
   final String content;
+  String? id;
 
-  const Entry(
+  Entry(
       {required this.title,
       required this.date,
       required this.feeling,
-      required this.content});
+      required this.content,
+      this.id});
 }
 
 Future<String> _authApi(credentials) async {
+  const url = "http://192.168.0.45:8000";
   //const url = "http://c1r7p10.42quebec.com/";
-  const url = "http://10.0.2.2:8000/";
+  //const url = "http://10.0.2.2:8000/";
   if (credentials != null) {
     var retval = await http.get(Uri.parse(url), headers: {
       "authorization": "Bearer ${credentials!.idToken}",

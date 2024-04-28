@@ -32,7 +32,7 @@ class DiaryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => DiaryModel(),
-      child: const HomePage(),
+      child: const HomeView(),
     );
   }
 }

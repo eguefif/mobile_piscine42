@@ -5,13 +5,13 @@ import 'package:diaryapp/views/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
   @override
-  State<HomePage> createState() => _AuthenticationState();
+  State<HomeView> createState() => _AuthenticationState();
 }
 
-class _AuthenticationState extends State<HomePage> {
+class _AuthenticationState extends State<HomeView> {
   Credentials? _credentials;
   late Auth0 auth0;
 
@@ -41,9 +41,11 @@ class _AuthenticationState extends State<HomePage> {
     });
     try {
       if (context.mounted) {
+        await Provider.of<DiaryModel>(
         // ignore: use_build_context_synchronously
-        await Provider.of<DiaryModel>(context, listen: false)
-            .connectToFireBase(credentials);
+          context,
+          listen: false,
+        ).connectToFireBase(credentials);
       }
     } catch (e) {
       debugPrint("$e");
@@ -55,6 +57,7 @@ class _AuthenticationState extends State<HomePage> {
     return _credentials == null
         ? LoginView(login: login)
         : ProfileView(
-            logout: logout);
+            logout: logout,
+          );
   }
 }

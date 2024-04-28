@@ -20,12 +20,23 @@ class NewEntry extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  TextField(
-                    controller: titleController,
-                    maxLength: 50,
-                    decoration: const InputDecoration(
-                      label: Text("Title"),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                     Expanded(
+                        child: TextField(
+                          controller: titleController,
+                          maxLength: 50,
+                          decoration: const InputDecoration(
+                            label: Text("Title"),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.close),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   DropdownMenu<Feeling>(
@@ -33,27 +44,33 @@ class NewEntry extends StatelessWidget {
                     controller: feelingController,
                     requestFocusOnTap: true,
                     label: const Text("Feeling"),
-                    dropdownMenuEntries: Feeling.values.map<DropdownMenuEntry<Feeling>>(
-                      (Feeling feeling) => DropdownMenuEntry<Feeling>(
-                        value: feeling,
-                        label: feeling.description,
-                        leadingIcon: SvgPicture.asset(feeling.asset, semanticsLabel: feeling.description),
-                      ),
-                    ).toList(),
+                    dropdownMenuEntries: Feeling.values
+                        .map<DropdownMenuEntry<Feeling>>(
+                          (Feeling feeling) => DropdownMenuEntry<Feeling>(
+                            value: feeling,
+                            label: feeling.description,
+                            leadingIcon: SvgPicture.asset(feeling.asset,
+                                semanticsLabel: feeling.description),
+                          ),
+                        )
+                        .toList(),
                   ),
                   const SizedBox(height: 10),
-                  TextField(
-                    controller: contentController,
-                    keyboardType: TextInputType.multiline,
-                    minLines: 1,
-                    maxLines: 15,
-                    maxLength: 500,
-                    decoration: const InputDecoration(
-                      label: Text("Content"),
+                  Expanded(
+                    child: TextField(
+                      controller: contentController,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 15,
+                      maxLength: 500,
+                      decoration: const InputDecoration(
+                        label: Text("Content"),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton(
                         onPressed: () {

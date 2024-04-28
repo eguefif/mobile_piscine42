@@ -1,26 +1,11 @@
-import 'package:diaryapp/models/diary_model.dart';
-import 'package:diaryapp/views/new_entry.dart';
+import 'package:diaryapp/views/widget/modals/new_entry.dart';
 import 'package:diaryapp/views/widget/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key, required this.logout});
 
   final Function logout;
-
-  void _openAddEntryModal(context) {
-    final diaryModel = Provider.of<DiaryModel>(context, listen: false);
-    showModalBottomSheet(
-      useSafeArea: true,
-      isScrollControlled: true,
-      context: context,
-      builder: (context) => ChangeNotifierProvider.value(
-        value: diaryModel,
-        child: const NewEntry(),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +21,24 @@ class ProfileView extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Profile(logout: logout),
+      body: const SafeArea(
+        child: Profile(),
       ),
       floatingActionButton: IconButton(
+        iconSize: 55,
+        style: IconButton.styleFrom(
+          elevation: 10,
+            backgroundColor: const Color.fromARGB(255, 13, 178, 18),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: const BorderSide(
+                color: Color.fromARGB(255, 25, 43, 26),
+                width: 4,
+              ),
+            )),
         icon: const Icon(Icons.add),
         onPressed: () {
-          _openAddEntryModal(context);
+          openAddEntryModal(context);
         },
       ),
     );
