@@ -1,4 +1,4 @@
-import 'package:diaryapp/views/widget/modals/new_entry/new_entry.dart';
+import 'package:diaryapp/views/widget/modals/show_add_entry_modal.dart';
 import 'package:diaryapp/views/widget/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,8 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Diary app", style: Theme.of(context).textTheme.displayMedium),
+        title:
+            Text("Diary app", style: Theme.of(context).textTheme.displayMedium),
         actions: [
           IconButton(
             padding: const EdgeInsets.all(10),
@@ -27,7 +28,12 @@ class ProfileView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Divider(height: 25, thickness: 5, color: Colors.black, indent: 25, endIndent: 25 ),
+            Divider(
+                height: 25,
+                thickness: 5,
+                color: Colors.black,
+                indent: 25,
+                endIndent: 25),
             Expanded(child: Profile()),
           ],
         ),
