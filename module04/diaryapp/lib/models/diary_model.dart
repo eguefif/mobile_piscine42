@@ -10,7 +10,7 @@ enum Feeling {
   smile("assets/smile.svg", "smile"),
   anger("assets/angry.svg", "anger"),
   neutral("assets/neutral.svg", "neutral"),
-  sad("assets/neutral.svg", "sad");
+  sad("assets/sad.svg", "sad");
   
   const Feeling(this.asset, this.description);
   final String asset;

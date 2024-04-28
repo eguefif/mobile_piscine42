@@ -1,4 +1,4 @@
-import 'package:diaryapp/views/widget/modals/new_entry.dart';
+import 'package:diaryapp/views/widget/modals/new_entry/new_entry.dart';
 import 'package:diaryapp/views/widget/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -11,35 +11,49 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Diary app"),
+        title: Text("Diary app", style: Theme.of(context).textTheme.displayMedium),
         actions: [
-          ElevatedButton(
+          IconButton(
+            padding: const EdgeInsets.all(10),
+            style: _getButtonStyle(),
+            icon: const Icon(Icons.logout),
             onPressed: () async {
               await logout();
             },
-            child: const Text("Log out"),
           ),
         ],
       ),
       body: const SafeArea(
-        child: Profile(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Divider(height: 25, thickness: 5, color: Colors.black, indent: 25, endIndent: 25 ),
+            Expanded(child: Profile()),
+          ],
+        ),
       ),
       floatingActionButton: IconButton(
+        padding: const EdgeInsets.all(10),
         iconSize: 55,
-        style: IconButton.styleFrom(
-          elevation: 10,
-            backgroundColor: const Color.fromARGB(255, 13, 178, 18),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-              side: const BorderSide(
-                color: Color.fromARGB(255, 25, 43, 26),
-                width: 4,
-              ),
-            )),
+        style: _getButtonStyle(),
         icon: const Icon(Icons.add),
         onPressed: () {
           openAddEntryModal(context);
         },
+      ),
+    );
+  }
+
+  ButtonStyle _getButtonStyle() {
+    return IconButton.styleFrom(
+      elevation: 10,
+      backgroundColor: const Color.fromARGB(255, 13, 178, 18),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+        side: const BorderSide(
+          color: Color.fromARGB(255, 25, 43, 26),
+          width: 4,
+        ),
       ),
     );
   }
